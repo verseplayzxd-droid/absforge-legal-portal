@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Exercise Library &amp; Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2e",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-background": "#e3e2e7",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "on-surface-variant": "#c3caac",
+                        "surface": "#121317",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#a6d700",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "on-secondary-container": "#bab8b7",
+                        "secondary-container": "#4a4949",
+                        "on-primary": "#273500",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#e4e2e4",
+                        "surface-container-highest": "#343539",
+                        "tertiary-container": "#e4e2e4",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e3e2e7",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434933",
+                        "secondary": "#c9c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-container-low": "#1a1b1f",
+                        "background": "#121317",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#4e6700",
+                        "primary-container": "#bef500",
+                        "outline": "#8d9479",
+                        "on-tertiary": "#303032",
+                        "on-primary-fixed": "#151f00",
+                        "surface-variant": "#343539",
+                        "primary-fixed-dim": "#a6d700",
+                        "on-primary-container": "#536d00",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#38393d",
+                        "on-error": "#690005",
+                        "surface-dim": "#121317",
+                        "on-tertiary-container": "#656466",
+                        "on-secondary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#bef500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #121317; color: #e3e2e7; }
+        .glass-card { background: rgba(28, 28, 30, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glow-text { text-shadow: 0 0 10px rgba(198, 255, 0, 0.3); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased font-body-lg text-body-lg min-h-screen flex flex-col pb-24 md:pb-0">
+<!-- Top Navigation App Bar -->
+<header class="w-full top-0 z-40 bg-surface dark:bg-surface flex justify-between items-center px-container-margin py-4 transition-all duration-200">
+<button class="text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined font-title-md text-title-md">menu</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-black text-primary-fixed tracking-tighter glow-text">ABSFORGE</h1>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">person</span>
+</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-container-margin grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
+<!-- Left Panel: Exercise Library -->
+<section class="flex flex-col gap-6" id="library-view">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Exercise Library</h2>
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors placeholder:text-on-surface-variant/50" placeholder="Search exercises..." type="text"/>
+</div>
+<!-- Categories -->
+<div class="flex overflow-x-auto gap-3 py-2 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps">All</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/20 hover:border-primary-fixed/50 font-label-caps text-label-caps transition-colors">Upper</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/20 hover:border-primary-fixed/50 font-label-caps text-label-caps transition-colors">Lower</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/20 hover:border-primary-fixed/50 font-label-caps text-label-caps transition-colors">Obliques</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/20 hover:border-primary-fixed/50 font-label-caps text-label-caps transition-colors">Core</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/20 hover:border-primary-fixed/50 font-label-caps text-label-caps transition-colors">Stretching</button>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3 cursor-pointer group hover:border-primary-fixed/40 transition-colors" onclick="showDetails()">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="High contrast, dark-mode 3D illustration of a muscular torso performing a reverse crunch against a deep black background with electric lime green neon accents highlighting the lower abdominal muscles. Cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-g8UYd4ynBL9nxhlz1lhFdT9WH5idMk_IFm-f8wpIYZLG-1hOJ6PiLQIS40vRZjrOleEuwBFDpsqG501IfELPvoTG7d7Uv-_K8Cu9n5lYQ4qrosKJzmALnD6S828DTEX4EtE9syyuZFQ498zn4eyrylaLZx65czmgVwLyq4N0bP-_O_FlWj-yfthfu6Ux5piObgQJnfm53zOd2Zupkk1jSaBjvMWZQUgzYhSGOL9kYr0QR1ABIJoGVQ"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-caps text-primary-fixed">LOWER</div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Reverse Crunch</h3>
+<p class="text-body-sm text-on-surface-variant">Beginner</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3 cursor-pointer group hover:border-primary-fixed/40 transition-colors">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="High contrast, dark-mode 3D illustration of a figure in a plank position against a deep black background with subtle white edge lighting and intense lime green accents indicating core engagement. Modern, athletic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9NiRzc4yhyQZVbNtZbHRSVWtGuKKGcNWndcrBpiGFOFxg6g6Rv2sVYQKw-SXmcLXFRvAJRFnJsRt_eLBRRgcVlJi2W0Tsfb7qZed_TIwDaxvxSGY23PsS-8rxJ6I3P0V-St8cXno8ztNaS44l_vQPz0sBzPPw7yAFLMdfu6M3rnlOyecPpQTgHltUecI2aYnNs9BuQ54fKhAxYkQ42mNGYi2xGLigh7CFvznQHkuEDdumEfZe6ScCkQ"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-caps text-primary-fixed">CORE</div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Plank</h3>
+<p class="text-body-sm text-on-surface-variant">Beginner</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3 cursor-pointer group hover:border-primary-fixed/40 transition-colors">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Dark modern illustration of a person doing Russian twists, dark background, lime green highlights on the obliques, high contrast, fitness app style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOE0RhTXuLCJh1TQYuixn2JPsVhuUKjgOWWIF_If-TcH5IUjA7rYtlCyiwEKFa4TcZ1znQnl9dyroQcmCdBzi7BjpWDIpQj_oItB_9lmsJi7vSlEuw-ncq6m6_VavWvmvEf2rINwYiWlJsyeoEs36_QZGwLmcU_942526HLXlIdFccF0xkAYPr3Ls-tw4aBEgBBo8E_AcR3Rol8XVwEh2DYTKC1w4mOfGTKS7FdYt4IHw4DJfq-O-9RA"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-caps text-primary-fixed">OBLIQUES</div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Russian Twist</h3>
+<p class="text-body-sm text-on-surface-variant">Intermediate</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3 cursor-pointer group hover:border-primary-fixed/40 transition-colors">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Dark dramatic illustration of crunches, focus on upper abs with bright lime green glowing highlights, stark black background, premium fitness app visuals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG06qI62sqpGKfISxyk6yoZHxZiptx4abQsIjxWdG3KLWtGlJJda53cJ85R9S7iAKTzllH_9AJI3ziFJohbTvo93rREwqcO9Z_ZZBF-52FrVgSsR16g01YoXvmYAjnQludg27KKIsHLXEj09oDv-WPazdyKT2flsikBnL15JG-S_RiuaCdNJljGOa0K2rRNfDV-7jfdfLD3NFmBgnvV2fMh-2BGv5RXjGxVTozW4s8hFM6x1PHbY4Zow"/>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-caps text-primary-fixed">UPPER</div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Crunches</h3>
+<p class="text-body-sm text-on-surface-variant">Beginner</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Exercise Details (Hidden on mobile by default, shown via JS) -->
+<section class="hidden lg:flex flex-col gap-6 fixed inset-0 z-50 bg-background lg:relative lg:bg-transparent lg:z-auto overflow-y-auto px-container-margin py-6 lg:p-0" id="details-view">
+<button class="lg:hidden flex items-center text-primary-fixed font-label-caps text-label-caps mb-4" onclick="hideDetails()">
+<span class="material-symbols-outlined mr-2">arrow_back</span> BACK TO LIBRARY
+            </button>
+<!-- Media Area -->
+<div class="w-full h-64 md:h-80 rounded-3xl bg-surface-container-high overflow-hidden relative border border-outline-variant/20 shadow-2xl">
+<!-- Placeholder for animation -->
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-highest to-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-primary-fixed/30">play_circle</span>
+</div>
+<!-- <video class="w-full h-full object-cover" loop autoplay muted playsinline> ... </video> -->
+<div class="absolute bottom-4 left-4 flex gap-2">
+<span class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full font-label-caps text-[10px] text-primary-fixed border border-primary-fixed/30">LOWER ABS</span>
+<span class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full font-label-caps text-[10px] text-on-surface border border-outline-variant/30">BEGINNER</span>
+</div>
+</div>
+<!-- Header -->
+<div>
+<h2 class="font-display-lg text-display-lg font-black text-primary tracking-tighter">Reverse Crunch</h2>
+<p class="text-on-surface-variant mt-2">A fundamental movement for targeting the lower abdominal region and building core stability.</p>
+</div>
+<!-- Instructions -->
+<div class="glass-card rounded-2xl p-6">
+<h3 class="font-title-md text-title-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed">format_list_numbered</span> Execution
+                </h3>
+<ul class="space-y-4">
+<li class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center flex-shrink-0 font-label-caps text-label-caps text-primary-fixed">1</div>
+<p class="text-on-surface-variant">Lie on your back with arms extended by your sides, palms facing down for support.</p>
+</li>
+<li class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center flex-shrink-0 font-label-caps text-label-caps text-primary-fixed">2</div>
+<p class="text-on-surface-variant">Bend your knees at 90 degrees and raise your legs so your thighs are perpendicular to the floor.</p>
+</li>
+<li class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center flex-shrink-0 font-label-caps text-label-caps text-primary-fixed">3</div>
+<p class="text-on-surface-variant">Exhale and contract your lower abs to curl your hips off the floor, bringing your knees toward your chest.</p>
+</li>
+<li class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center flex-shrink-0 font-label-caps text-label-caps text-primary-fixed">4</div>
+<p class="text-on-surface-variant">Inhale and slowly lower your hips back to the starting position with control.</p>
+</li>
+</ul>
+</div>
+<!-- Mistakes & Tips -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="glass-card rounded-2xl p-5 border-l-2 border-l-error">
+<h4 class="font-label-caps text-label-caps text-error mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">warning</span> Common Mistake
+                    </h4>
+<p class="text-body-sm text-on-surface-variant">Using momentum to swing the legs rather than engaging the core to lift the pelvis.</p>
+</div>
+<div class="glass-card rounded-2xl p-5 border-l-2 border-l-primary-fixed">
+<h4 class="font-label-caps text-label-caps text-primary-fixed mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">lightbulb</span> Pro Tip
+                    </h4>
+<p class="text-body-sm text-on-surface-variant">Imagine trying to touch your knees to the ceiling, lifting upward instead of backward.</p>
+</div>
+</div>
+<!-- Action -->
+<div class="mt-4 pb-8 lg:pb-0">
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps py-4 rounded-xl hover:bg-primary-fixed-dim active:scale-[0.98] transition-all flex items-center justify-center gap-2 tracking-widest shadow-[0_0_20px_rgba(198,255,0,0.2)]">
+<span class="material-symbols-outlined">play_arrow</span> TRY EXERCISE
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-40 rounded-t-xl md:hidden bg-surface-container/90 backdrop-blur-xl dark:bg-surface-container/90 border-t border-outline-variant/10 shadow-lg flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">home</span>
+<span class="font-label-caps text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary-fixed after:rounded-full transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="font-label-caps text-[10px]">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">monitoring</span>
+<span class="font-label-caps text-[10px]">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">person</span>
+<span class="font-label-caps text-[10px]">Profile</span>
+</a>
+</nav>
+<script>
+        function showDetails() {
+            if (window.innerWidth < 1024) { // lg breakpoint
+                document.getElementById('library-view').classList.add('hidden');
+                document.getElementById('details-view').classList.remove('hidden');
+                document.getElementById('details-view').classList.add('flex');
+            }
+        }
+
+        function hideDetails() {
+            if (window.innerWidth < 1024) {
+                document.getElementById('library-view').classList.remove('hidden');
+                document.getElementById('details-view').classList.add('hidden');
+                document.getElementById('details-view').classList.remove('flex');
+            }
+        }
+
+        // Handle resize events to reset visibility classes appropriately
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                document.getElementById('library-view').classList.remove('hidden');
+                document.getElementById('details-view').classList.remove('hidden');
+                document.getElementById('details-view').classList.add('flex');
+            } else {
+                // Default back to library view on mobile when resizing down
+                document.getElementById('library-view').classList.remove('hidden');
+                document.getElementById('details-view').classList.add('hidden');
+                document.getElementById('details-view').classList.remove('flex');
+            }
+        });
+    </script>
+</body></html>

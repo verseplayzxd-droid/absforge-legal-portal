@@ -1,0 +1,27 @@
+# AbsForge – 30 Day Abs Workout
+
+## Product Vision
+A premium Android fitness app focused on building core strength through a structured 30-day no-equipment home workout program.
+
+## Core Screens
+1. **Onboarding**: Intro, Goals, Level, Personal Stats.
+2. **Home Dashboard**: Today's workout, streak, progress ring, quick stats.
+3. **30 Day Program**: Calendar view of all days with locked/unlocked states.
+4. **Workout Overview**: Exercise list, duration, difficulty before starting.
+5. **Active Workout**: Large exercise visual, rep/timer, coaching text.
+6. **Rest Timer**: Countdown, next exercise preview, banner ad placeholder.
+7. **Workout Complete**: Stats, rewards, sharing, progress update.
+8. **Exercise Library**: Searchable list by category (Upper, Lower, Obliques).
+9. **Exercise Details**: Instructions, animations, common mistakes.
+10. **Progress**: Analytics, streak, activity charts, weight progress.
+11. **Body Tracker**: Weight, BMI, body measurements.
+12. **Daily Reminder**: Notification settings and time selector.
+13. **Profile**: Settings, subscription status, personal info.
+14. **Workout Settings**: Rest duration, voice coach, sounds.
+15. **Premium / Pro**: Subscription tiers and benefits.
+
+## Design Principles
+- **Fast Path to Training**: 1-2 taps to start the day's workout.
+- **High Retention**: Visible streaks and progress rings.
+- **Distraction-Free**: No ads during active exercise.
+- **Premium Aesthetic**: Dark mode, lime green accents, high-quality illustrations.

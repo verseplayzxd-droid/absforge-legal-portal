@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AbsForge</string>
+    <string name="app_tagline">30 Day Abs Workout</string>
+
+    <!-- Onboarding -->
+    <string name="welcome_headline">BUILD YOUR ABS\nIN 30 DAYS</string>
+    <string name="welcome_body">Short daily workouts.\nNo equipment required.</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="select_goal">What\'s your goal?</string>
+    <string name="goal_lose_fat">Lose Belly Fat</string>
+    <string name="goal_strong_abs">Build Strong Abs</string>
+    <string name="goal_six_pack">Get Six Pack Abs</string>
+    <string name="select_level">Select your fitness level</string>
+    <string name="level_beginner">Beginner</string>
+    <string name="level_intermediate">Intermediate</string>
+    <string name="level_advanced">Advanced</string>
+    <string name="level_beginner_desc">New to structured core training.</string>
+    <string name="level_intermediate_desc">Exercise regularly and want more intensity.</string>
+    <string name="level_advanced_desc">Ready for demanding core workouts.</string>
+    <string name="user_info_title">Tell us about yourself</string>
+    <string name="workout_preference_title">When do you usually train?</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="evening">Evening</string>
+    <string name="custom_time">Custom Time</string>
+    <string name="plan_ready">YOUR PLAN IS READY</string>
+    <string name="start_journey">START MY JOURNEY</string>
+    <string name="next">NEXT</string>
+
+    <!-- Home -->
+    <string name="home">Home</string>
+    <string name="workouts">Workouts</string>
+    <string name="progress">Progress</string>
+    <string name="profile">Profile</string>
+    <string name="start_workout">START WORKOUT</string>
+    <string name="day_streak">DAY STREAK</string>
+    <string name="total_minutes">Total Minutes</string>
+    <string name="calories_burned">Calories Burned</string>
+    <string name="current_streak">Current Streak</string>
+    <string name="completed_workouts">Completed</string>
+
+    <!-- Workout -->
+    <string name="workout_complete">WORKOUT COMPLETE!</string>
+    <string name="great_job">Great job.</string>
+    <string name="finish">FINISH</string>
+    <string name="share_progress">SHARE PROGRESS</string>
+    <string name="rest">REST</string>
+    <string name="skip">SKIP</string>
+    <string name="add_20_sec">+20 SEC</string>
+    <string name="done">DONE</string>
+    <string name="pause">Pause</string>
+    <string name="resume">RESUME</string>
+    <string name="restart_exercise">RESTART EXERCISE</string>
+    <string name="end_workout">END WORKOUT</string>
+    <string name="paused">PAUSED</string>
+    <string name="exercise_of">Exercise %1$d of %2$d</string>
+
+    <!-- Progress -->
+    <string name="activity">ACTIVITY</string>
+    <string name="body">BODY</string>
+
+    <!-- Settings -->
+    <string name="workout_settings">Workout Settings</string>
+    <string name="voice_coach">Voice Coach</string>
+    <string name="reminder">Reminder</string>
+    <string name="achievements">Achievements</string>
+    <string name="premium">Premium</string>
+    <string name="privacy">Privacy</string>
+    <string name="delete_all_data">DELETE ALL MY DATA</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">Workout Reminders</string>
+    <string name="notification_channel_desc">Daily workout reminder notifications</string>
+</resources>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABSFORGE - Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#292a2e",
+                    "on-secondary": "#313030",
+                    "tertiary-fixed-dim": "#c8c6c8",
+                    "on-background": "#e3e2e7",
+                    "on-primary-fixed-variant": "#3a4d00",
+                    "on-surface-variant": "#c3caac",
+                    "surface": "#121317",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-tint": "#a6d700",
+                    "secondary-fixed-dim": "#c9c6c5",
+                    "inverse-surface": "#e3e2e7",
+                    "on-secondary-container": "#bab8b7",
+                    "secondary-container": "#4a4949",
+                    "on-primary": "#273500",
+                    "inverse-on-surface": "#2f3034",
+                    "tertiary-fixed": "#e4e2e4",
+                    "surface-container-highest": "#343539",
+                    "tertiary-container": "#e4e2e4",
+                    "on-error-container": "#ffdad6",
+                    "on-surface": "#e3e2e7",
+                    "error-container": "#93000a",
+                    "outline-variant": "#434933",
+                    "secondary": "#c9c6c5",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-lowest": "#0d0e12",
+                    "on-tertiary-fixed-variant": "#474649",
+                    "on-tertiary-fixed": "#1b1b1d",
+                    "surface-container-low": "#1a1b1f",
+                    "background": "#121317",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#4e6700",
+                    "primary-container": "#bef500",
+                    "outline": "#8d9479",
+                    "on-tertiary": "#303032",
+                    "on-primary-fixed": "#151f00",
+                    "surface-variant": "#343539",
+                    "primary-fixed-dim": "#a6d700",
+                    "on-primary-container": "#536d00",
+                    "tertiary": "#ffffff",
+                    "surface-bright": "#38393d",
+                    "on-error": "#690005",
+                    "surface-dim": "#121317",
+                    "on-tertiary-container": "#656466",
+                    "on-secondary-fixed-variant": "#474646",
+                    "surface-container": "#1e1f23",
+                    "primary": "#ffffff",
+                    "primary-fixed": "#bef500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-lg": "32px",
+                    "container-margin": "20px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #0A0A0A; color: #e3e2e7; }
+        .electric-glow { box-shadow: 0 0 15px rgba(198, 255, 0, 0.2); }
+        .card-border { border: 1px solid rgba(255, 255, 255, 0.05); }
+        .progress-ring { transform: rotate(-90deg); transform-origin: 50% 50%; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary w-full top-0 sticky bg-surface flat no shadows transition-all duration-200 active:scale-95 flex justify-between items-center px-container-margin py-4 w-full z-40">
+<button class="hover:opacity-80 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<div class="font-display-lg text-display-lg font-black text-primary-fixed tracking-tighter">ABSFORGE</div>
+<div class="hover:opacity-80 w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant/30 flex items-center justify-center">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up profile picture of a fit, athletic individual in a dark gym environment. Moody lighting with subtle green rim light. High contrast, professional portrait style, modern fitness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWR0ePRNYmwkyowLKEUbAfW2VpoftkEaKFQekgS1is5_ujVKWRBYWPgEreCe4taJHp3qdoXi4txPqJqf25lM4LJKZl4frixO4jcrLOVD_oV_71HTm5DDmhNbIwqMc2hBw2ycScmccvYxe61xfdIWC8xXDwnKXkKD3xJR2zVbAnFmjZQgQKN02XB5FAnwpYr49cv06X8izndQf-z1AkK5vs2o6666yENywIWF3k0rIhUtRsz8aDZ60Ig"/>
+</div>
+</header>
+<main class="px-container-margin pt-stack-md flex flex-col gap-stack-lg max-w-lg mx-auto">
+<!-- Header Section -->
+<section class="flex flex-col gap-stack-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Ready for Day 7?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Consistency builds results.</p>
+</section>
+<!-- Progress Ring Section -->
+<section class="flex justify-center items-center py-4">
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- SVG Ring -->
+<svg class="w-full h-full absolute inset-0 progress-ring" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-primary-fixed stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="192.6" stroke-linecap="round" stroke-width="8" style="filter: drop-shadow(0 0 4px rgba(198, 255, 0, 0.4));"></circle>
+</svg>
+<div class="flex flex-col items-center justify-center z-10">
+<div class="flex items-center gap-1 text-primary-fixed font-title-md text-title-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span>6</span>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-1">DAY STREAK</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-2">7<span class="text-on-surface-variant text-title-md font-title-md">/30</span></div>
+</div>
+</div>
+</section>
+<!-- Featured Workout Card -->
+<section class="bg-[#1C1C1E] rounded-2xl p-6 flex flex-col gap-6 card-border relative overflow-hidden">
+<!-- Background Image/Gradient -->
+<div class="absolute inset-0 opacity-20 bg-cover bg-center" data-alt="Abstract, high-contrast dark texture resembling carbon fiber or gym equipment. Subtle lime green light bleeding from the edge. Modern, professional athletic branding aesthetic, dark mode focus." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWt_RPTk1i-MC638V151ZsppsFBbVevQ_mRvUxoULk2IozfNHYH62jQN4If63BNeErTh-XTX7_RHwQk820z9UBe4YcmD-EGr9oboqog728MdlKxoZ2IArBgAKK0cyv4EKj6FTd2uDp78rtEo9ZRvniKUH0jNKNXo6MfUodotmarQnDXtDMZJ-LL3HCHpXvyQhQdsnnzBiXXvfkcts2ixN0FsdUgyOgbJrEnqlbwd48a4I-naQJQhrcHA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1E] to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps text-primary-fixed tracking-widest uppercase">Day 7</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-1">Core Strength</h2>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
+<span>12 Exercises</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>11 Min</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span>90 kcal</span>
+</div>
+</div>
+<!-- Exercise Preview Row -->
+<div class="flex gap-2 mt-2">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden border border-outline-variant/20 flex items-center justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">CR</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden border border-outline-variant/20 flex items-center justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">PL</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden border border-outline-variant/20 flex items-center justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">TW</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden border border-outline-variant/20 flex items-center justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">+9</span>
+</div>
+</div>
+<button class="w-full bg-primary-fixed text-[#0A0A0A] font-title-md text-title-md font-bold py-4 rounded-xl mt-2 flex items-center justify-center gap-2 electric-glow active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                     Start Workout
+                 </button>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="flex flex-col gap-4">
+<h3 class="font-title-md text-title-md text-primary">Your Stats</h3>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-[#1C1C1E] rounded-xl p-4 flex flex-col items-center justify-center card-border text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-[24px]">timer</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary text-[20px] leading-tight mt-1">86</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">min</span>
+</div>
+<div class="bg-[#1C1C1E] rounded-xl p-4 flex flex-col items-center justify-center card-border text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-[24px]">local_fire_department</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary text-[20px] leading-tight mt-1">720</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">kcal</span>
+</div>
+<div class="bg-[#1C1C1E] rounded-xl p-4 flex flex-col items-center justify-center card-border text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary text-[20px] leading-tight mt-1">6</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">streak</span>
+</div>
+</div>
+</section>
+<!-- Quick Workouts -->
+<section class="flex flex-col gap-4 mb-8">
+<div class="flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-primary">Quick Workouts</h3>
+<span class="font-body-sm text-body-sm text-primary-fixed">See All</span>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<!-- Quick Card 1 -->
+<div class="min-w-[160px] bg-[#1C1C1E] rounded-xl p-4 card-border flex flex-col gap-3 flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-fixed border border-primary-fixed/20">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary text-[16px] leading-snug">HIIT Sprint</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">5 Min • Intense</span>
+</div>
+</div>
+<!-- Quick Card 2 -->
+<div class="min-w-[160px] bg-[#1C1C1E] rounded-xl p-4 card-border flex flex-col gap-3 flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-fixed border border-primary-fixed/20">
+<span class="material-symbols-outlined">self_improvement</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary text-[16px] leading-snug">Recovery Flow</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">10 Min • Stretch</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface-container/80 backdrop-blur-xl dark:bg-surface-container/80 text-primary-fixed dark:text-primary-fixed font-label-caps text-label-caps text-primary-fixed fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/10 shadow-lg fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe-bottom">
+<div class="flex flex-col items-center justify-center text-primary-fixed relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary-fixed after:rounded-full hover:text-primary transition-transform duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined mb-1 text-[24px]">home</span>
+<span>Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined mb-1 text-[24px]">fitness_center</span>
+<span>Workouts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined mb-1 text-[24px]">monitoring</span>
+<span>Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined mb-1 text-[24px]">person</span>
+<span>Profile</span>
+</div>
+</nav>
+<script>
+        // Adjust padding for bottom nav area dynamically
+        document.addEventListener('DOMContentLoaded', () => {
+            const bottomNav = document.querySelector('nav');
+            if (bottomNav) {
+                const navHeight = bottomNav.offsetHeight;
+                document.body.style.paddingBottom = `${navHeight + 20}px`;
+            }
+        });
+    </script>
+</body></html>

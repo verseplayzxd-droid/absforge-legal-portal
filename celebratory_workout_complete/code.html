@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workout Complete - ABSFORGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2e",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-background": "#e3e2e7",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "on-surface-variant": "#c3caac",
+                        "surface": "#121317",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#a6d700",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "on-secondary-container": "#bab8b7",
+                        "secondary-container": "#4a4949",
+                        "on-primary": "#273500",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#e4e2e4",
+                        "surface-container-highest": "#343539",
+                        "tertiary-container": "#e4e2e4",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e3e2e7",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434933",
+                        "secondary": "#c9c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-container-low": "#1a1b1f",
+                        "background": "#121317",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#4e6700",
+                        "primary-container": "#bef500",
+                        "outline": "#8d9479",
+                        "on-tertiary": "#303032",
+                        "on-primary-fixed": "#151f00",
+                        "surface-variant": "#343539",
+                        "primary-fixed-dim": "#a6d700",
+                        "on-primary-container": "#536d00",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#38393d",
+                        "on-error": "#690005",
+                        "surface-dim": "#121317",
+                        "on-tertiary-container": "#656466",
+                        "on-secondary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#bef500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(28, 28, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(198, 255, 0, 0.2);
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+        }
+        
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col items-center justify-center font-sans antialiased overflow-x-hidden relative">
+<!-- Confetti / Particle Background Effect -->
+<div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" id="particle-container"></div>
+<main class="w-full max-w-md mx-auto px-container-margin py-8 flex flex-col items-center justify-center relative z-10 flex-grow">
+<!-- Celebration Header -->
+<div class="text-center mb-stack-lg animate-[fade-in-up_0.5s_ease-out] flex flex-col items-center">
+<div class="w-24 h-24 mb-4 text-primary-fixed">
+<svg class="w-full h-full" viewbox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+<circle class="checkmark-circle stroke-current" cx="26" cy="26" fill="none" r="25" stroke-width="2"></circle>
+<path class="checkmark-check stroke-current" d="M14.1 27.2l7.1 7.2 16.7-16.8" fill="none" stroke-width="4"></path>
+</svg>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Workout Complete!</h1>
+<p class="font-title-md text-title-md text-on-surface-variant">Great job.</p>
+</div>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-2 gap-4 w-full mb-stack-lg animate-[fade-in-up_0.6s_ease-out]">
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant mb-1 text-2xl">timer</span>
+<span class="font-title-md text-title-md text-primary">11:42</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-1 uppercase">Time</span>
+</div>
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant mb-1 text-2xl">local_fire_department</span>
+<span class="font-title-md text-title-md text-primary">92</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-1 uppercase">Kcal</span>
+</div>
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center justify-center col-span-2">
+<span class="material-symbols-outlined text-on-surface-variant mb-1 text-2xl">fitness_center</span>
+<span class="font-title-md text-title-md text-primary">12</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-1 uppercase">Exercises</span>
+</div>
+</div>
+<!-- Streak Progress -->
+<div class="glass-panel rounded-xl p-6 w-full flex flex-col items-center mb-stack-lg animate-[fade-in-up_0.7s_ease-out] neon-glow relative overflow-hidden">
+<div class="flex justify-between w-full mb-2">
+<h2 class="font-title-md text-title-md text-primary z-10">Streak</h2>
+<span class="font-title-md text-title-md text-primary-fixed z-10">7 Days</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-4 mb-2 z-10 relative overflow-hidden">
+<div class="bg-primary-fixed h-4 rounded-full" style="width: 23%"></div>
+</div>
+<div class="flex justify-between w-full z-10 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<span>Day 7 of 30</span>
+<span>23%</span>
+</div>
+<p class="font-body-sm text-body-sm text-center text-on-surface-variant z-10 mt-4">Keep going. Day 8 is waiting for you.</p>
+</div>
+<!-- Actions -->
+<div class="w-full space-y-4 animate-[fade-in-up_0.8s_ease-out]">
+<button class="w-full bg-primary-fixed text-[#0A0A0A] font-bold py-[24px] rounded-xl font-label-caps text-label-caps uppercase transition-transform active:scale-95 shadow-[0_0_15px_rgba(198,255,0,0.3)]">
+                FINISH
+            </button>
+<button class="w-full bg-gradient-to-r from-surface-container to-surface-container-high border border-outline-variant/30 text-primary py-[20px] rounded-xl font-title-md text-title-md transition-transform active:scale-95 flex items-center justify-center gap-3 shadow-lg">
+<span class="material-symbols-outlined text-primary-fixed">ios_share</span>
+                Share Progress
+            </button>
+</div>
+</main>
+<!-- Interstitial Ad Space -->
+<div class="w-full bg-surface-container-low border-t border-outline-variant/10 py-6 flex flex-col items-center justify-center mt-auto z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-2">Advertisement</span>
+<div class="w-[320px] h-[50px] bg-surface-container-high rounded flex items-center justify-center border border-outline-variant/20">
+<span class="text-on-surface-variant text-sm">Ad Placement</span>
+</div>
+</div>
+<script>
+        // Simple particle effect for celebration
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('particle-container');
+            const colors = ['#C6FF00', '#FFFFFF', '#343539'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute rounded-full opacity-0';
+                
+                // Randomize properties
+                const size = Math.random() * 8 + 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const animDuration = Math.random() * 2 + 1;
+                const delay = Math.random() * 0.5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                
+                // Set animation directly
+                particle.style.animation = `float-up ${animDuration}s ease-out ${delay}s forwards`;
+                
+                container.appendChild(particle);
+            }
+        });
+    </script>
+<style>
+        @keyframes float-up {
+            0% { transform: translateY(50px) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body></html>

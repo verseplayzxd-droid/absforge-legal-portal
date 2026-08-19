@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workout Overview - Core Strength</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-secondary": "#313030",
+                "on-primary-container": "#536d00",
+                "tertiary-fixed": "#e4e2e4",
+                "on-surface": "#e3e2e7",
+                "error": "#ffb4ab",
+                "surface-container-low": "#1a1b1f",
+                "on-secondary-fixed-variant": "#474646",
+                "secondary-container": "#4a4949",
+                "on-error-container": "#ffdad6",
+                "tertiary": "#ffffff",
+                "background": "#121317",
+                "tertiary-fixed-dim": "#c8c6c8",
+                "on-tertiary-container": "#656466",
+                "surface-container-highest": "#343539",
+                "on-tertiary-fixed-variant": "#474649",
+                "on-background": "#e3e2e7",
+                "on-tertiary-fixed": "#1b1b1d",
+                "surface-bright": "#38393d",
+                "on-primary": "#273500",
+                "surface-container-lowest": "#0d0e12",
+                "tertiary-container": "#e4e2e4",
+                "surface-container": "#1e1f23",
+                "secondary-fixed": "#e5e2e1",
+                "surface-dim": "#121317",
+                "on-error": "#690005",
+                "surface-tint": "#a6d700",
+                "on-secondary-container": "#bab8b7",
+                "surface-variant": "#343539",
+                "outline-variant": "#434933",
+                "primary-fixed": "#bef500",
+                "on-secondary-fixed": "#1c1b1b",
+                "primary": "#ffffff",
+                "error-container": "#93000a",
+                "on-primary-fixed": "#151f00",
+                "primary-fixed-dim": "#a6d700",
+                "outline": "#8d9479",
+                "on-primary-fixed-variant": "#3a4d00",
+                "on-tertiary": "#303032",
+                "surface": "#121317",
+                "surface-container-high": "#292a2e",
+                "inverse-on-surface": "#2f3034",
+                "inverse-surface": "#e3e2e7",
+                "primary-container": "#bef500",
+                "secondary-fixed-dim": "#c9c6c5",
+                "on-surface-variant": "#c3caac",
+                "inverse-primary": "#4e6700",
+                "secondary": "#c9c6c5"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "stack-sm": "8px",
+                "gutter": "16px",
+                "stack-lg": "32px",
+                "container-margin": "20px",
+                "stack-md": "16px"
+        },
+        "fontFamily": {
+                "headline-lg-mobile": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Inter"
+                ],
+                "title-md": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "label-caps": [
+                        "JetBrains Mono"
+                ],
+                "body-sm": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "title-md": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .glass-card {
+            background: rgba(28, 28, 30, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .electric-glow {
+            box-shadow: 0 0 15px rgba(198, 255, 0, 0.2);
+        }
+
+        /* Base scrollbar hide */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen pb-[100px]">
+<!-- Top Navigation (Task-focused, so standard nav shell is suppressed, using contextual back nav) -->
+<header class="w-full top-0 sticky bg-surface/90 backdrop-blur-md z-40">
+<div class="flex justify-between items-center px-container-margin py-4 w-full">
+<button class="text-primary hover:opacity-80 transition-all duration-200 active:scale-95 flex items-center justify-center p-2 rounded-full glass-card">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-title-md text-title-md text-primary font-bold tracking-tight">Day 7</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="px-container-margin mt-4">
+<!-- Hero Section -->
+<section class="mb-stack-lg">
+<div class="relative w-full h-64 rounded-3xl overflow-hidden mb-4 glass-card">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent z-10"></div>
+<img class="w-full h-full object-cover object-center absolute inset-0 z-0" data-alt="A cinematic, high-contrast medium shot of a muscular athlete performing a core strength workout in a premium, dark, futuristic gym environment. The scene is illuminated by dramatic, moody edge lighting with vibrant electric lime green neon accents reflecting off their skin and the polished dark surfaces. The aesthetic is intense, focused, and powerful, perfectly suited for a high-end fitness app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUMK9x9HBQS_6hkGOI9KTenOIVXfYaBKPrCXg3S33TCv3d69L0CeaVTGTly_HX7wSrh2gT7kDM1sEfYMjSc0McymJfj4UG8r4UNTdPkzKVnHrA4r1xgSRXye4SV9UXH9X0b0qxaVdtuJ03mlduetYHwFxWylIZbqv7gP--yIpKLSfQfLsBp6Cjp8Siw714XVImlJUvJssOndo7Pi7GHNvIW4xQmjKohYTUKH6Tnz4irQhctBvv85Nt4A"/>
+<div class="absolute bottom-4 left-4 z-20">
+<div class="flex gap-2 mb-2">
+<span class="bg-white/10 backdrop-blur-md text-primary font-label-caps text-label-caps px-3 py-1 rounded-full uppercase border border-white/5">Core</span>
+<span class="bg-white/10 backdrop-blur-md text-primary font-label-caps text-label-caps px-3 py-1 rounded-full uppercase border border-white/5">Intermediate</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary font-bold">Core Strength</h2>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-4 mb-stack-lg">
+<div class="glass-card rounded-xl p-4 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-2xl" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-title-md text-title-md text-primary font-bold">11</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Min</span>
+</div>
+<div class="glass-card rounded-xl p-4 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-2xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-title-md text-title-md text-primary font-bold">90</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Kcal</span>
+</div>
+<div class="glass-card rounded-xl p-4 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary-fixed mb-1 text-2xl" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="font-title-md text-title-md text-primary font-bold">12</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Exercises</span>
+</div>
+</div>
+</section>
+<!-- Exercises List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-title-md text-title-md text-primary font-semibold">Circuit</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3 Rounds</span>
+</div>
+<div class="flex flex-col gap-stack-md">
+<!-- Exercise 1 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 transition-transform active:scale-[0.98]">
+<div class="w-20 h-20 rounded-xl bg-surface-container overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist, stylized vector illustration of a person demonstrating a Bent Leg Twist core exercise. The illustration uses stark white lines on a deep charcoal gray background, with subtle glowing electric lime highlights emphasizing the engaged core muscles. The aesthetic is clean, professional, and instructional, suitable for a dark-mode fitness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0F23sK4J9H8UCaoZCMghbET8VnOuNW8Jx3YCsWOybSmwNZkrL5IZSPX6dq4fjj2MC6eq9Rq7X8SW3JLJLnDJGeUwpxLjx_g5g4eLS2fE8v2ihU5uwP5Mvsfk7k-mpEz6tSVewbNofHMy4YZtEy-sWxgVfK4bjSVMQwpBwzcdI9gkzkJiAqc_i5DMbj7iX_jHyyNkU6eWA9jQ9-vp0jtlD1ipgKJcF8gr9Kx8WOTy_kk8lpmqeijk0vg"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-body-lg text-body-lg text-primary font-semibold mb-1">Bent Leg Twist</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">x 16 Reps</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+<!-- Exercise 2 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 transition-transform active:scale-[0.98]">
+<div class="w-20 h-20 rounded-xl bg-surface-container overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist, stylized vector illustration of a person demonstrating a Reverse Crunch core exercise. The illustration uses stark white lines on a deep charcoal gray background, with subtle glowing electric lime highlights emphasizing the engaged core muscles. The aesthetic is clean, professional, and instructional, suitable for a dark-mode fitness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwAbNrNP0P_J8wgNc3tsyinGJPCOVN0-PUKxkVcWzkI_m9yIY8cYD0e25Av5vf-vS-L5cBrBEqCxwNZp_OtfcG1rW6qjrab49Zw_UXrPTcoX4lF7MmI8JXl2a2c2ILkLFPvxFQ5W_Y3ysEGNhQAbkNSeIDycJzBqbTIKpql6Pd8kBBTAG9Fycf4zXFDw0EvWqpH3PJaacMR53A6ZFlGoxxKQQcGMpV_NC--bBOwcN469yxExyOeHFqeQ"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-body-lg text-body-lg text-primary font-semibold mb-1">Reverse Crunch</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">x 12 Reps</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+<!-- Exercise 3 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 transition-transform active:scale-[0.98]">
+<div class="w-20 h-20 rounded-xl bg-surface-container overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist, stylized vector illustration of a person demonstrating a V Crunch core exercise. The illustration uses stark white lines on a deep charcoal gray background, with subtle glowing electric lime highlights emphasizing the engaged core muscles. The aesthetic is clean, professional, and instructional, suitable for a dark-mode fitness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMN9DklbJX03Ooonyx8YC9df6p0seo0c7q_vL-Dxy4CUWShTCDOHiioTPZXmqvikpK_qeowk-dViSfMoAi9DRx-GJJLzNhe1lUp9LPbu5przTp3JG6g6reYp5aFay77QXLpjOZmUO7SP6TA4dc-9MsUt5zITMw2pnrl9MlIhVxMfw_P2qyhkB1mRF-qwMvEICkgtoSsnjTV4hEcjTWAY_Cp3fGvnfk1guLyAS2iCq4krYItXKHRzax0Q"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-body-lg text-body-lg text-primary font-semibold mb-1">V Crunch</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">x 10 Reps</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+<!-- Exercise 4 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 transition-transform active:scale-[0.98]">
+<div class="w-20 h-20 rounded-xl bg-surface-container overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist, stylized vector illustration of a person demonstrating a Plank hold core exercise. The illustration uses stark white lines on a deep charcoal gray background, with subtle glowing electric lime highlights emphasizing the engaged core muscles. The aesthetic is clean, professional, and instructional, suitable for a dark-mode fitness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-pxN8jksCQzcu6_20zx-QgQKNqknKty_GJI_fWfwdFKXMw2a06Lnj10kdpq5f7MU2Qi9PanDCLux2GhFLpAQx6LFnfHDj3w49kwLmMB7DdLcnwgIaOHYtw4kT6ubcU2I5WNtLeG4z6lLxq6yKw_vPikPWoBpbWq3pz9TEjpzpyZ1skNGPlWBj2mWexm-orx20JqmZATw_IBTwrax-41WoGSzflpGBMUO67YvQ4leRk6T758VHut9yOQ"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-body-lg text-body-lg text-primary font-semibold mb-1">Plank</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">45 Seconds</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+<!-- Rest -->
+<div class="border border-outline-variant/30 bg-surface-container-low rounded-2xl p-4 flex items-center justify-center gap-2 my-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium uppercase tracking-wider">Rest 30s</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action Button -->
+<div class="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-50 pt-12 pointer-events-none">
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-title-md text-title-md font-bold rounded-[24px] py-[24px] electric-glow hover:opacity-90 active:scale-[0.98] transition-all pointer-events-auto uppercase tracking-wider flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            Start Workout
+        </button>
+</div>
+</body></html>

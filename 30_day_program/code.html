@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>30 Day Program</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#292a2e",
+                      "on-secondary": "#313030",
+                      "tertiary-fixed-dim": "#c8c6c8",
+                      "on-background": "#e3e2e7",
+                      "on-primary-fixed-variant": "#3a4d00",
+                      "on-surface-variant": "#c3caac",
+                      "surface": "#121317",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "surface-tint": "#a6d700",
+                      "secondary-fixed-dim": "#c9c6c5",
+                      "inverse-surface": "#e3e2e7",
+                      "on-secondary-container": "#bab8b7",
+                      "secondary-container": "#4a4949",
+                      "on-primary": "#273500",
+                      "inverse-on-surface": "#2f3034",
+                      "tertiary-fixed": "#e4e2e4",
+                      "surface-container-highest": "#343539",
+                      "tertiary-container": "#e4e2e4",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#e3e2e7",
+                      "error-container": "#93000a",
+                      "outline-variant": "#434933",
+                      "secondary": "#c9c6c5",
+                      "secondary-fixed": "#e5e2e1",
+                      "surface-container-lowest": "#0d0e12",
+                      "on-tertiary-fixed-variant": "#474649",
+                      "on-tertiary-fixed": "#1b1b1d",
+                      "surface-container-low": "#1a1b1f",
+                      "background": "#121317",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#4e6700",
+                      "primary-container": "#bef500",
+                      "outline": "#8d9479",
+                      "on-tertiary": "#303032",
+                      "on-primary-fixed": "#151f00",
+                      "surface-variant": "#343539",
+                      "primary-fixed-dim": "#a6d700",
+                      "on-primary-container": "#536d00",
+                      "tertiary": "#ffffff",
+                      "surface-bright": "#38393d",
+                      "on-error": "#690005",
+                      "surface-dim": "#121317",
+                      "on-tertiary-container": "#656466",
+                      "on-secondary-fixed-variant": "#474646",
+                      "surface-container": "#1e1f23",
+                      "primary": "#ffffff",
+                      "primary-fixed": "#bef500"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "stack-lg": "32px",
+                      "container-margin": "20px",
+                      "stack-md": "16px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "display-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+          .glass-panel {
+              background: rgba(28, 28, 30, 0.8);
+              backdrop-filter: blur(12px);
+              -webkit-backdrop-filter: blur(12px);
+              border: 1px solid rgba(255, 255, 255, 0.05);
+          }
+          .glow-ring {
+              box-shadow: 0 0 15px rgba(198, 255, 0, 0.2);
+          }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-lg">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky z-40 flat no shadows flex justify-between items-center px-container-margin py-4 transition-all duration-200">
+<button class="text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-black text-primary-fixed tracking-tighter">ABSFORGE</h1>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+</header>
+<main class="px-container-margin pt-stack-sm pb-stack-lg max-w-4xl mx-auto">
+<!-- Header Section -->
+<div class="mb-stack-lg flex flex-col items-center text-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">30 Day Abs Challenge</h2>
+<!-- Progress Indicator -->
+<div class="w-full max-w-xs mt-4">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">PROGRESS</span>
+<span class="font-title-md text-title-md text-primary-fixed">23% Complete</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed rounded-full" style="width: 23%;"></div>
+</div>
+</div>
+</div>
+<!-- Level Selector -->
+<div class="glass-panel rounded-xl p-1 mb-stack-lg flex justify-between max-w-md mx-auto">
+<button class="flex-1 py-2 px-4 rounded-lg text-center font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Beginner</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-center font-label-caps text-label-caps bg-surface-container-highest text-primary shadow-sm border border-outline-variant/20 transition-colors">Intermediate</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-center font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">Advanced</button>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-4 md:grid-cols-6 gap-3">
+<!-- Days 1-6 Checked -->
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-primary-fixed/30 bg-primary-fixed/5">
+<span class="font-title-md text-title-md text-primary opacity-50">1</span>
+<span class="material-symbols-outlined text-primary-fixed absolute inset-0 m-auto flex items-center justify-center" style="font-variation-settings: 'FILL' 1; font-size: 32px;">check_circle</span>
+</div>
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-primary-fixed/30 bg-primary-fixed/5">
+<span class="font-title-md text-title-md text-primary opacity-50">2</span>
+<span class="material-symbols-outlined text-primary-fixed absolute inset-0 m-auto flex items-center justify-center" style="font-variation-settings: 'FILL' 1; font-size: 32px;">check_circle</span>
+</div>
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-primary-fixed/30 bg-primary-fixed/5">
+<span class="font-title-md text-title-md text-primary opacity-50">3</span>
+<span class="material-symbols-outlined text-primary-fixed absolute inset-0 m-auto flex items-center justify-center" style="font-variation-settings: 'FILL' 1; font-size: 32px;">check_circle</span>
+</div>
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center text-center p-2 border-outline-variant/30">
+<span class="font-title-md text-title-md text-on-surface-variant opacity-60">4</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">REST</span>
+</div>
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-primary-fixed/30 bg-primary-fixed/5">
+<span class="font-title-md text-title-md text-primary opacity-50">5</span>
+<span class="material-symbols-outlined text-primary-fixed absolute inset-0 m-auto flex items-center justify-center" style="font-variation-settings: 'FILL' 1; font-size: 32px;">check_circle</span>
+</div>
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-primary-fixed/30 bg-primary-fixed/5">
+<span class="font-title-md text-title-md text-primary opacity-50">6</span>
+<span class="material-symbols-outlined text-primary-fixed absolute inset-0 m-auto flex items-center justify-center" style="font-variation-settings: 'FILL' 1; font-size: 32px;">check_circle</span>
+</div>
+<!-- Day 7 TODAY Highlight -->
+<div class="aspect-square bg-surface-container-high rounded-xl flex flex-col items-center justify-center border-2 border-primary-fixed glow-ring relative">
+<div class="absolute -top-2 bg-primary-fixed text-on-primary-fixed font-label-caps text-[10px] px-2 py-0.5 rounded-full">TODAY</div>
+<span class="font-title-md text-title-md text-primary">7</span>
+<span class="material-symbols-outlined text-primary-fixed mt-1 text-xl">play_circle</span>
+</div>
+<!-- Days 8-30 Locked -->
+<div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center text-center p-2 border-outline-variant/30 text-on-surface-variant opacity-50">
+<span class="font-title-md text-title-md">8</span>
+<span class="font-label-caps text-[10px] mt-1">REST</span>
+</div>
+<!-- Generating remaining days dynamically to keep code concise but illustrative -->
+<script>
+                document.write(Array.from({length: 22}, (_, i) => {
+                    const day = i + 9;
+                    const isRest = day % 4 === 0;
+                    return `
+                    <div class="aspect-square glass-panel rounded-xl flex flex-col items-center justify-center text-center p-2 border-outline-variant/10 text-on-surface-variant opacity-40">
+                        <span class="font-title-md text-title-md">${day}</span>
+                        ${isRest ? `<span class="font-label-caps text-[10px] mt-1">REST</span>` : `<span class="material-symbols-outlined text-sm mt-1 opacity-50">lock</span>`}
+                    </div>
+                    `;
+                }).join(''));
+            </script>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/10 shadow-lg bg-surface-container/80 backdrop-blur-xl dark:bg-surface-container/80 flex justify-around items-center px-4 py-3 transition-transform duration-300">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary-fixed after:rounded-full hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="font-label-caps text-label-caps">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-label-caps text-label-caps">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>

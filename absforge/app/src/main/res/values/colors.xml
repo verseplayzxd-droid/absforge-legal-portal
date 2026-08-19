@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="absforge_background">#FF090B0A</color>
+    <color name="absforge_surface">#FF141715</color>
+    <color name="absforge_surface_elevated">#FF1B1E1C</color>
+    <color name="absforge_primary">#FFB7FF00</color>
+    <color name="absforge_on_primary">#FF0A0A0A</color>
+    <color name="absforge_text_primary">#FFFFFFFF</color>
+    <color name="absforge_text_secondary">#FF9A9F9B</color>
+    <color name="absforge_error">#FFFF6B6B</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

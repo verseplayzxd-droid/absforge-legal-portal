@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABSFORGE - Profile &amp; Reminders</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2e",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-background": "#e3e2e7",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "on-surface-variant": "#c3caac",
+                        "surface": "#121317",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#a6d700",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "on-secondary-container": "#bab8b7",
+                        "secondary-container": "#4a4949",
+                        "on-primary": "#273500",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#e4e2e4",
+                        "surface-container-highest": "#343539",
+                        "tertiary-container": "#e4e2e4",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e3e2e7",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434933",
+                        "secondary": "#c9c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-container-low": "#1a1b1f",
+                        "background": "#121317",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#4e6700",
+                        "primary-container": "#bef500",
+                        "outline": "#8d9479",
+                        "on-tertiary": "#303032",
+                        "on-primary-fixed": "#151f00",
+                        "surface-variant": "#343539",
+                        "primary-fixed-dim": "#a6d700",
+                        "on-primary-container": "#536d00",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#38393d",
+                        "on-error": "#690005",
+                        "surface-dim": "#121317",
+                        "on-tertiary-container": "#656466",
+                        "on-secondary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#bef500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .glass-card { background: rgba(28, 28, 30, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .electric-glow { box-shadow: 0 0 15px rgba(198, 255, 0, 0.2); }
+        .toggle-checkbox:checked { right: 0; border-color: theme('colors.primary-fixed'); }
+        .toggle-checkbox:checked + .toggle-label { background-color: theme('colors.primary-fixed'); }
+        .toggle-checkbox:checked + .toggle-label:after { transform: translateX(100%); border-color: white; }
+    </style>
+</head>
+<body class="antialiased font-body-lg min-h-screen pb-24 flex flex-col md:flex-row max-w-7xl mx-auto">
+<!-- Top App Bar (Desktop: Side, Mobile: Top) -->
+<header class="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-surface border-r border-outline-variant/10 p-container-margin shrink-0">
+<div class="font-display-lg text-display-lg font-black text-primary-fixed tracking-tighter mb-12">ABSFORGE</div>
+<nav class="flex flex-col gap-4 flex-1">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-all duration-200 py-3" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps uppercase">Home</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-all duration-200 py-3" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-label-caps text-label-caps uppercase">Workouts</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-all duration-200 py-3" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase">Progress</span>
+</a>
+<a class="flex items-center gap-4 text-primary-fixed bg-surface-container-high rounded-lg px-4 py-3 electric-glow" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps uppercase">Profile</span>
+</a>
+</nav>
+</header>
+<!-- Mobile Top App Bar -->
+<div class="md:hidden flex justify-between items-center px-container-margin py-4 w-full top-0 sticky bg-surface flat no shadows transition-all duration-200 active:scale-95 z-40">
+<span class="material-symbols-outlined text-primary dark:text-primary">menu</span>
+<div class="font-display-lg text-display-lg font-black text-primary-fixed tracking-tighter">ABSFORGE</div>
+<img alt="User Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30" data-alt="A close up, high contrast, cinematic headshot of a fit individual in a dark gym environment, intense dramatic lighting, modern athletic aesthetic, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV2Icj-d9sYwSe_gM3cBvd7lP3xmXtG-QKZmIB0u1iafwGANAP8Y8hu506kiKagDI6CqWjLiBadagLsbKeW17wZIuF3t6Plefo5rL78veEyTC7OidlieJaWhciQ9XC2keDqomENUVTF0etKyyzJAGAX2CVEZb9ilbSU47HHhhDnX9-08i7pL-kh59qqrJeeinCUXiCTG5C781hpwcT8Vhb1Z7u4FB1z7CUJ7b-adRVKVhgtAuwapITVg"/>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 px-container-margin py-stack-md md:py-stack-lg flex flex-col md:flex-row gap-stack-lg w-full">
+<!-- Profile Section (Left/Top) -->
+<div class="flex-1 flex flex-col gap-stack-md">
+<!-- User Header -->
+<div class="glass-card rounded-2xl p-6 flex items-center gap-6 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container to-transparent z-0"></div>
+<div class="relative z-10 w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-primary-fixed to-surface-container">
+<img alt="Alex" class="w-full h-full rounded-full object-cover" data-alt="A close up, high contrast, cinematic headshot of a fit individual in a dark gym environment, intense dramatic lighting, modern athletic aesthetic, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhK_QN_UQjLqfSkDucRHHviPzAkpZCmJ8_gon-d2TKn5wxqRfP2VVNEDytKobrmbnMwzS4mFoes8QNyNDR3zbvUKdvurd5E4BGhn5uxtB070BXzWwaKxg-qnuLc_HXnBulh_rcKJ4uWP7zrUt8ewGotB8iLv_EarLBt2RKggcSpO3Jxjxy4RvmKg2O9wh3-9ynUlLMZtBXrXf-3tuekojOo9F_KSWUrTlB39g-xhCmHXI4b4njCsACBQ"/>
+</div>
+<div class="relative z-10 flex-1">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-1">Alex</h1>
+<div class="inline-flex items-center gap-2 bg-surface-container-high/50 border border-outline-variant/20 rounded-full px-3 py-1">
+<span class="material-symbols-outlined text-primary-fixed text-[16px]">military_tech</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Intermediate Plan</span>
+</div>
+</div>
+<button class="relative z-10 w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">edit</span>
+</button>
+</div>
+<!-- Settings List -->
+<div class="glass-card rounded-2xl p-2 flex flex-col">
+<div class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant mb-2 border-b border-outline-variant/10">PREFERENCES</div>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Workout Settings</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">record_voice_over</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Voice Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Enabled (English)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Rest Duration</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">30s Standard</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+</div>
+<div class="glass-card rounded-2xl p-2 flex flex-col">
+<div class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant mb-2 border-b border-outline-variant/10">SYSTEM</div>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">language</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Language</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">EN</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">straighten</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Units</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lbs / In</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Health Data</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+</div>
+<div class="glass-card rounded-2xl p-2 flex flex-col mb-4">
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high/50 transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-error transition-colors">
+<span class="material-symbols-outlined">block</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Remove Ads</span>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">PRO</div>
+</a>
+<div class="flex gap-4 p-4 mt-2 justify-center border-t border-outline-variant/10">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline decoration-outline-variant underline-offset-4" href="#">Privacy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline decoration-outline-variant underline-offset-4" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline decoration-outline-variant underline-offset-4" href="#">Support</a>
+</div>
+</div>
+</div>
+<!-- Reminders Section (Right/Bottom) -->
+<div class="flex-1 flex flex-col gap-stack-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2 hidden md:block">Reminders</h2>
+<!-- Daily Reminder Toggle -->
+<div class="glass-card rounded-2xl p-6 flex flex-col gap-6 border-l-4 border-l-primary-fixed">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary-fixed electric-glow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Daily Reminder</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stay consistent with notifications</span>
+</div>
+</div>
+<!-- Custom Toggle -->
+<div class="relative inline-block w-14 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 top-1 left-1 checked:right-1 checked:left-auto" id="daily_reminder" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-8 rounded-full bg-surface-container cursor-pointer transition-colors duration-200 ease-in-out border border-outline-variant" for="daily_reminder"></label>
+</div>
+</div>
+<!-- Time Selector -->
+<div class="bg-surface-container rounded-xl p-4 flex flex-col items-center justify-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Training Time</span>
+<div class="flex items-end gap-2 text-primary">
+<span class="font-display-lg text-[64px] leading-none font-black tracking-tighter">07:00</span>
+<span class="font-title-md text-title-md text-primary-fixed mb-2">PM</span>
+</div>
+</div>
+<!-- Days of Week -->
+<div class="flex justify-between gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:bg-surface-container-high">S</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-primary-fixed text-on-primary-fixed electric-glow">M</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-primary-fixed text-on-primary-fixed electric-glow">T</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:bg-surface-container-high">W</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-primary-fixed text-on-primary-fixed electric-glow">T</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-primary-fixed text-on-primary-fixed electric-glow">F</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:bg-surface-container-high">S</button>
+</div>
+</div>
+<!-- Strong Reminder -->
+<div class="glass-card rounded-2xl p-6 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">crisis_alert</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Strong Reminder</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Persistent alerts until workout begins</span>
+</div>
+</div>
+<div class="relative inline-block w-14 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 top-1 left-1 checked:right-1 checked:left-auto" id="strong_reminder" name="toggle2" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-8 rounded-full bg-surface-container cursor-pointer transition-colors duration-200 ease-in-out border border-outline-variant" for="strong_reminder"></label>
+</div>
+</div>
+</div>
+<!-- Notification Preview -->
+<div class="mt-4 border border-outline-variant/30 rounded-2xl p-4 bg-surface relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-fixed to-transparent opacity-50"></div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-fixed text-sm">fitness_center</span>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">ABSFORGE • Now</span>
+</div>
+<span class="font-body-lg text-body-lg text-primary block mb-1">Time to Forge Your Core</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Your 7:00 PM session is ready. 15 minutes of intensity awaits. Let's go!</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container/80 backdrop-blur-xl dark:bg-surface-container/80 text-primary-fixed dark:text-primary-fixed font-label-caps text-label-caps fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/10 shadow-lg flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-[10px] uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span class="text-[10px] uppercase">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-300 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="text-[10px] uppercase">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary-fixed after:rounded-full hover:text-primary transition-transform duration-300 active:scale-90 w-16" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] uppercase">Profile</span>
+</a>
+</nav>
+</body></html>

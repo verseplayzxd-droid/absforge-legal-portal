@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Workout - V Crunch</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2e",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-background": "#e3e2e7",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "on-surface-variant": "#c3caac",
+                        "surface": "#121317",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#a6d700",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "on-secondary-container": "#bab8b7",
+                        "secondary-container": "#4a4949",
+                        "on-primary": "#273500",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#e4e2e4",
+                        "surface-container-highest": "#343539",
+                        "tertiary-container": "#e4e2e4",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e3e2e7",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434933",
+                        "secondary": "#c9c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-container-low": "#1a1b1f",
+                        "background": "#121317",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#4e6700",
+                        "primary-container": "#bef500",
+                        "outline": "#8d9479",
+                        "on-tertiary": "#303032",
+                        "on-primary-fixed": "#151f00",
+                        "surface-variant": "#343539",
+                        "primary-fixed-dim": "#a6d700",
+                        "on-primary-container": "#536d00",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#38393d",
+                        "on-error": "#690005",
+                        "surface-dim": "#121317",
+                        "on-tertiary-container": "#656466",
+                        "on-secondary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#bef500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col antialiased">
+<!-- Countdown Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-md">
+<div class="flex flex-col items-center gap-4 animate-pulse">
+<span class="font-display-lg text-[120px] leading-none text-primary-fixed tracking-tighter" style="text-shadow: 0 0 40px rgba(190, 245, 0, 0.4);">
+            3
+        </span>
+<span class="font-title-md text-title-md text-on-surface-variant tracking-widest uppercase">
+            Get Ready
+        </span>
+</div>
+</div>
+<!-- Top Header & Progress -->
+<header class="px-container-margin py-4 w-full top-0 sticky bg-surface z-10 flex flex-col gap-4">
+<div class="flex justify-between items-center w-full">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">close</span>
+</button>
+<div class="font-title-md text-title-md text-on-surface tracking-wide">
+                Exercise 3 of 12
+            </div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden shadow-inner border border-outline-variant/10">
+<div class="h-full bg-primary-fixed w-1/4 rounded-full transition-all duration-300 relative shadow-[0_0_12px_rgba(190,245,0,0.5)] after:content-[''] after:absolute after:inset-0 after:bg-primary-fixed after:blur-[2px] after:opacity-50"></div>
+</div>
+</header>
+<!-- Main Workout Canvas -->
+<main class="flex-1 flex flex-col justify-center px-container-margin py-stack-lg gap-stack-lg relative overflow-hidden">
+<!-- Illustration Area (Placeholder for V Crunch animation/graphic) -->
+<div class="relative w-full aspect-square max-w-md mx-auto bg-surface-container border border-outline-variant/20 rounded-[24px] flex items-center justify-center overflow-hidden shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-lowest/80 z-0"></div>
+<img class="w-full h-full object-cover opacity-80 z-0" data-alt="A 3D stylized render of a professional athlete performing a V-crunch on a dark studio background. High-contrast lighting with an electric lime green rim light outlining the figure against deep black. The mood is intense, focused, and powerful, matching a premium modern fitness app dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwpfC64WK-T1GO3QP8cI9J_K7GU-HnOVcJMJhO3RBTCHMGB_ewLjWv6itcniK400TFVAS0io_NPHkIQ7FcLz2GJ8vhBXOw0v1IXzrAf5t-CJEkpwsgjhifVsPyOG5IpzM0QgLqKlxPSjx69jlC5oqFapFS8GwvjqGZLeQgDHyTk6tfuY_x8GEYPUsIGVxhg0ya9xeQqNA7M-OX5G02CpfrlQyUsskEut54mc7RMgOMqJqpjs0WE8qlLQ"/>
+<div class="absolute bottom-4 left-4 right-4 z-10 text-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">V CRUNCH</h1>
+<div class="flex items-center justify-center gap-2 mt-2">
+<span class="px-3 py-1 bg-surface-container-high/50 backdrop-blur-md rounded-full font-label-caps text-label-caps text-on-surface-variant border border-outline-variant/30">CORE</span>
+<span class="px-3 py-1 bg-surface-container-high/50 backdrop-blur-md rounded-full font-label-caps text-label-caps text-on-surface-variant border border-outline-variant/30">STRENGTH</span>
+</div>
+</div>
+</div>
+<!-- Metrics & Coaching -->
+<div class="flex flex-col items-center gap-stack-sm text-center">
+<div class="font-display-lg text-display-lg text-primary-fixed tabular-nums tracking-tighter" style="text-shadow: 0 0 20px rgba(190, 245, 0, 0.2);">
+                x 16
+            </div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs text-balance">
+                Keep your core tight and move slowly.
+            </p>
+</div>
+<!-- Controls -->
+<div class="flex items-center justify-center gap-8 mt-auto pt-stack-md pb-stack-lg">
+<button class="w-14 h-14 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(190,245,0,0.3)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+</div>
+</main>
+<!-- Bottom Action -->
+<div class="px-container-margin pb-container-margin pt-4 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/10 z-20">
+<button class="w-full h-[64px] bg-surface-container-highest text-primary-fixed font-title-md text-title-md rounded-[16px] border border-outline-variant/30 hover:bg-surface-container-high transition-colors active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            DONE
+        </button>
+</div>
+</body></html>

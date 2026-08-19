@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABSFORGE - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#292a2e",
+                    "on-secondary": "#313030",
+                    "tertiary-fixed-dim": "#c8c6c8",
+                    "on-background": "#e3e2e7",
+                    "on-primary-fixed-variant": "#3a4d00",
+                    "on-surface-variant": "#c3caac",
+                    "surface": "#121317",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-tint": "#a6d700",
+                    "secondary-fixed-dim": "#c9c6c5",
+                    "inverse-surface": "#e3e2e7",
+                    "on-secondary-container": "#bab8b7",
+                    "secondary-container": "#4a4949",
+                    "on-primary": "#273500",
+                    "inverse-on-surface": "#2f3034",
+                    "tertiary-fixed": "#e4e2e4",
+                    "surface-container-highest": "#343539",
+                    "tertiary-container": "#e4e2e4",
+                    "on-error-container": "#ffdad6",
+                    "on-surface": "#e3e2e7",
+                    "error-container": "#93000a",
+                    "outline-variant": "#434933",
+                    "secondary": "#c9c6c5",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-lowest": "#0d0e12",
+                    "on-tertiary-fixed-variant": "#474649",
+                    "on-tertiary-fixed": "#1b1b1d",
+                    "surface-container-low": "#1a1b1f",
+                    "background": "#121317",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#4e6700",
+                    "primary-container": "#bef500",
+                    "outline": "#8d9479",
+                    "on-tertiary": "#303032",
+                    "on-primary-fixed": "#151f00",
+                    "surface-variant": "#343539",
+                    "primary-fixed-dim": "#a6d700",
+                    "on-primary-container": "#536d00",
+                    "tertiary": "#ffffff",
+                    "surface-bright": "#38393d",
+                    "on-error": "#690005",
+                    "surface-dim": "#121317",
+                    "on-tertiary-container": "#656466",
+                    "on-secondary-fixed-variant": "#474646",
+                    "surface-container": "#1e1f23",
+                    "primary": "#ffffff",
+                    "primary-fixed": "#bef500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "2xl": "1.5rem"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-lg": "32px",
+                    "container-margin": "20px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "btn-padding": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+        }
+        .step-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .step-container.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .glass-card {
+            background: rgba(28, 28, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card.selected {
+            border-color: theme('colors.primary-fixed');
+            box-shadow: 0 0 15px rgba(198, 255, 0, 0.1);
+        }
+
+        .input-glass {
+            background: rgba(44, 44, 46, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+        
+        .input-glass:focus {
+            border-color: theme('colors.primary-fixed');
+            outline: none;
+            box-shadow: 0 0 10px rgba(198, 255, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-fixed/5 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary-fixed/5 rounded-full blur-[100px]"></div>
+</div>
+<!-- Onboarding Container -->
+<div class="w-full max-w-md px-container-margin z-10 h-[100dvh] flex flex-col justify-between py-8">
+<!-- Step 1: Splash -->
+<div class="step-container active flex-col items-center justify-center h-full text-center" id="step-1">
+<div class="w-full aspect-square mb-stack-lg rounded-full overflow-hidden relative glass-card p-4">
+<img class="w-full h-full object-cover rounded-full grayscale opacity-80 mix-blend-screen" data-alt="A dramatic, high-contrast illustration of a heavily muscled abdomen in a dark, atmospheric gym environment. The lighting is low-key with intense lime green edge lighting highlighting the muscle definition. The aesthetic is modern, intense, and focused on peak physical fitness, set against a deep black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3QfLtZrNrni3Pjdk_VciZFWUK3-X57AnEwCFErruJF88_yahxjMzqg9aYR7ZFxdh6OUsOJjU-2-olaltYRxNinq0W9KFfxQiO_tdnS1ClU2QqVy8A1J4wtRFgyc_hzsilBzi4Ubfi3l2s2w0yXAOWIBks_2AJfpgiqFBhLKSseG5kitjY4gV-gcils8OTROB6L0BDZski1o81-4FBWGLu49S3rOj8-FEcT1aPoLNm2DsGg-xt_GuLIA"/>
+<div class="absolute inset-0 border-2 border-primary-fixed/20 rounded-full scale-[1.05]"></div>
+<div class="absolute inset-0 border border-primary-fixed/40 rounded-full scale-[1.1]"></div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-sm tracking-tight">Build Your Abs in 30 Days</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg px-4">Short daily workouts designed for home training. No equipment required.</p>
+<div class="mt-auto w-full">
+<button class="w-full bg-primary-fixed text-surface font-title-md text-title-md py-4 rounded-xl hover:bg-primary-fixed-dim transition-all active:scale-95 shadow-[0_0_20px_rgba(198,255,0,0.3)]" onclick="nextStep(2)">Get Started</button>
+</div>
+</div>
+<!-- Step 2: Goal Selection -->
+<div class="step-container flex-col h-full pt-12" id="step-2">
+<div class="flex items-center justify-between w-full mb-stack-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="prevStep(1)">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div class="flex space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="w-6"></div> <!-- Spacer -->
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">What is your main goal?</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">Select one to tailor your plan.</p>
+<div class="flex flex-col gap-4 flex-grow">
+<button class="goal-btn glass-card w-full p-6 rounded-2xl flex items-center justify-between text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'goal')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-2xl">trending_down</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Lose Belly Fat</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Burn fat and reveal muscle</p>
+</div>
+</div>
+<div class="indicator w-6 h-6 rounded-full border-2 border-surface-container-highest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-sm text-surface opacity-0">check</span>
+</div>
+</button>
+<button class="goal-btn glass-card w-full p-6 rounded-2xl flex items-center justify-between text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'goal')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-2xl">fitness_center</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Build Strong Abs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Improve core strength</p>
+</div>
+</div>
+<div class="indicator w-6 h-6 rounded-full border-2 border-surface-container-highest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-sm text-surface opacity-0">check</span>
+</div>
+</button>
+<button class="goal-btn glass-card w-full p-6 rounded-2xl flex items-center justify-between text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'goal')">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-2xl">grid_4x4</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">Get Six Pack Abs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Maximum definition</p>
+</div>
+</div>
+<div class="indicator w-6 h-6 rounded-full border-2 border-surface-container-highest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-sm text-surface opacity-0">check</span>
+</div>
+</button>
+</div>
+<div class="mt-auto w-full pt-8">
+<button class="w-full bg-surface-container-highest text-on-surface-variant font-title-md text-title-md py-4 rounded-xl transition-all" disabled="" id="btn-next-2" onclick="nextStep(3)">Continue</button>
+</div>
+</div>
+<!-- Step 3: Level Selection -->
+<div class="step-container flex-col h-full pt-12" id="step-3">
+<div class="flex items-center justify-between w-full mb-stack-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="prevStep(2)">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div class="flex space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="w-6"></div> <!-- Spacer -->
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Current Fitness Level</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">Helps us set the right starting intensity.</p>
+<div class="flex flex-col gap-4 flex-grow">
+<button class="level-btn glass-card w-full p-6 rounded-2xl text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'level')">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-title-md text-title-md text-primary">Beginner</h3>
+<div class="flex space-x-1">
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">I rarely exercise or am just starting out.</p>
+</button>
+<button class="level-btn glass-card w-full p-6 rounded-2xl text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'level')">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-title-md text-title-md text-primary">Intermediate</h3>
+<div class="flex space-x-1">
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">I exercise 1-3 times a week.</p>
+</button>
+<button class="level-btn glass-card w-full p-6 rounded-2xl text-left transition-all active:scale-[0.98]" onclick="selectOption(this, 'level')">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-title-md text-title-md text-primary">Advanced</h3>
+<div class="flex space-x-1">
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">I train intensely almost every day.</p>
+</button>
+</div>
+<div class="mt-auto w-full pt-8">
+<button class="w-full bg-surface-container-highest text-on-surface-variant font-title-md text-title-md py-4 rounded-xl transition-all" disabled="" id="btn-next-3" onclick="nextStep(4)">Continue</button>
+</div>
+</div>
+<!-- Step 4: Personal Info -->
+<div class="step-container flex-col h-full pt-12 overflow-y-auto no-scrollbar" id="step-4">
+<div class="flex items-center justify-between w-full mb-stack-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="prevStep(3)">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div class="flex space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+</div>
+<div class="w-6"></div> <!-- Spacer -->
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Personalize Your Plan</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">Final details for algorithm calibration.</p>
+<div class="flex flex-col gap-6 pb-24">
+<!-- Gender -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-3 block uppercase">Gender</label>
+<div class="flex gap-4">
+<button class="gender-btn flex-1 glass-card p-4 rounded-xl text-center transition-all" onclick="selectGender(this)">Male</button>
+<button class="gender-btn flex-1 glass-card p-4 rounded-xl text-center transition-all" onclick="selectGender(this)">Female</button>
+</div>
+</div>
+<!-- Age -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Age</label>
+<div class="relative">
+<input class="w-full input-glass rounded-xl p-4 text-primary font-body-lg text-body-lg placeholder-surface-container-highest" placeholder="25" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-caps">YRS</span>
+</div>
+</div>
+<!-- Height & Weight Row -->
+<div class="flex gap-4">
+<div class="flex-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Height</label>
+<div class="relative">
+<input class="w-full input-glass rounded-xl p-4 text-primary font-body-lg text-body-lg placeholder-surface-container-highest" placeholder="175" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-caps">CM</span>
+</div>
+</div>
+<div class="flex-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Weight</label>
+<div class="relative">
+<input class="w-full input-glass rounded-xl p-4 text-primary font-body-lg text-body-lg placeholder-surface-container-highest" placeholder="70" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-caps">KG</span>
+</div>
+</div>
+</div>
+<!-- Target Weight -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Target Weight</label>
+<div class="relative">
+<input class="w-full input-glass rounded-xl p-4 text-primary font-body-lg text-body-lg placeholder-surface-container-highest" placeholder="65" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-caps">KG</span>
+</div>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 w-full p-container-margin bg-gradient-to-t from-surface via-surface/90 to-transparent">
+<button class="w-full bg-primary-fixed text-surface font-title-md text-title-md py-4 rounded-xl hover:bg-primary-fixed-dim transition-all active:scale-95 shadow-[0_0_20px_rgba(198,255,0,0.3)] flex items-center justify-center gap-2" onclick="finishOnboarding()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+                    Create My Plan
+                </button>
+</div>
+</div>
+</div>
+<script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-container').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+        }
+
+        function prevStep(step) {
+            nextStep(step);
+        }
+
+        function selectOption(element, type) {
+            // Remove selected class from all buttons of this type
+            const buttons = document.querySelectorAll(`.${type}-btn`);
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+                if(type === 'goal') {
+                    btn.querySelector('.indicator').classList.remove('bg-primary-fixed', 'border-primary-fixed');
+                    btn.querySelector('.indicator span').classList.remove('opacity-100');
+                }
+            });
+
+            // Add selected class to clicked button
+            element.classList.add('selected');
+            
+            if(type === 'goal') {
+                element.querySelector('.indicator').classList.add('bg-primary-fixed', 'border-primary-fixed');
+                element.querySelector('.indicator span').classList.add('opacity-100');
+            }
+
+            // Enable next button
+            const nextBtnId = type === 'goal' ? 'btn-next-2' : 'btn-next-3';
+            const nextBtn = document.getElementById(nextBtnId);
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+            nextBtn.classList.add('bg-primary-fixed', 'text-surface', 'shadow-[0_0_15px_rgba(198,255,0,0.2)]');
+        }
+
+        function selectGender(element) {
+            document.querySelectorAll('.gender-btn').forEach(btn => {
+                btn.classList.remove('selected', 'text-primary-fixed', 'border-primary-fixed');
+            });
+            element.classList.add('selected', 'text-primary-fixed', 'border-primary-fixed');
+        }
+
+        function finishOnboarding() {
+            // Add loading state
+            const btn = document.querySelector('button[onclick="finishOnboarding()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Generating...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check</span> Plan Ready';
+                // Typically redirect here
+            }, 1500);
+        }
+        
+        // Hide scrollbar utility for webkit
+        document.head.insertAdjacentHTML('beforeend', '<style>.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }</style>');
+    </script>
+</body></html>

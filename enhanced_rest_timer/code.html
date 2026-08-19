@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABSFORGE - Rest Timer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2e",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-background": "#e3e2e7",
+                        "on-primary-fixed-variant": "#3a4d00",
+                        "on-surface-variant": "#c3caac",
+                        "surface": "#121317",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#a6d700",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "on-secondary-container": "#bab8b7",
+                        "secondary-container": "#4a4949",
+                        "on-primary": "#273500",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#e4e2e4",
+                        "surface-container-highest": "#343539",
+                        "tertiary-container": "#e4e2e4",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e3e2e7",
+                        "error-container": "#93000a",
+                        "outline-variant": "#434933",
+                        "secondary": "#c9c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-container-low": "#1a1b1f",
+                        "background": "#121317",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#4e6700",
+                        "primary-container": "#bef500",
+                        "outline": "#8d9479",
+                        "on-tertiary": "#303032",
+                        "on-primary-fixed": "#151f00",
+                        "surface-variant": "#343539",
+                        "primary-fixed-dim": "#a6d700",
+                        "on-primary-container": "#536d00",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#38393d",
+                        "on-error": "#690005",
+                        "surface-dim": "#121317",
+                        "on-tertiary-container": "#656466",
+                        "on-secondary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#bef500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .timer-circle {
+            stroke-dasharray: 879; /* 2 * pi * r (r=140) */
+            stroke-dashoffset: 220; /* Example progress */
+            transition: stroke-dashoffset 1s linear;
+        }
+        
+        /* Subtle glow for the timer progress */
+        .timer-glow {
+            filter: drop-shadow(0 0 12px rgba(198, 255, 0, 0.2));
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-lg selection:bg-primary-container selection:text-on-primary-container">
+<!-- Main Canvas Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin py-stack-lg w-full max-w-md mx-auto">
+<!-- Rest Text -->
+<div class="text-center mb-stack-lg w-full">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-2">REST</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recover and prepare for the next set.</p>
+</div>
+<!-- Huge Circular Timer -->
+<div class="relative w-[300px] h-[300px] mb-stack-lg flex items-center justify-center shrink-0">
+<!-- Background Ring (Dark Gray) -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewbox="0 0 300 300">
+<circle class="stroke-[#2C2C2E]" cx="150" cy="150" fill="none" r="140" stroke-width="12"></circle>
+<!-- Progress Ring (Electric Lime) -->
+<circle class="stroke-[#C6FF00] timer-circle timer-glow" cx="150" cy="150" fill="none" r="140" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Timer Text -->
+<div class="text-center z-10 flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-primary tracking-tighter tabular-nums">00:30</span>
+</div>
+</div>
+<!-- Next Exercise Preview Card -->
+<div class="w-full bg-[#1C1C1E] rounded-[24px] border border-white/5 p-stack-md flex items-center gap-4 mb-stack-lg relative overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+<!-- Subtle accent glow -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-fixed/5 rounded-full blur-2xl"></div>
+<!-- Exercise Image -->
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-surface-container-high overflow-hidden shrink-0 border border-white/5">
+<img class="w-full h-full object-cover" data-alt="A focused close-up shot of a fitness model performing flutter kicks on a dark gym mat. The lighting is low-key and dramatic, casting deep shadows that highlight abdominal muscle definition. An electric lime edge light accents the athlete's sneakers and shorts. The overall aesthetic is gritty, professional, and modern, fitting a high-intensity dark-mode fitness app design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXiOr9tY8zvY5LINuBTAjzdnj5MzgSmf9EBJ91vGNatoJ4GZTaQEVx73SO0MUy3ArT5aEWFj1jEYb07jJ0ysLlHtoh1LKh3EPSFS_xdbgvKaA34RExFVgqUk5dBZ399Xm2NfyR58VL8e1a1Y9-sPxU9yVPSQcDKoJX046SqVVpPAu-D51NwlOO5tvNOEmL91R0AQDFoPVdHu7c-RYBySGcxIVkUQB1zGDdWmdHhCOjKVqMtI1efLkJ6g"/>
+</div>
+<!-- Exercise Details -->
+<div class="flex-grow">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-widest">Next Exercise</p>
+<h3 class="font-title-md text-title-md text-primary truncate">Flutter Kicks</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 0;">timer</span>
+                    30 sec
+                </p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full flex gap-4 mb-stack-lg">
+<button class="flex-1 bg-[#1C1C1E] border border-white/5 hover:bg-[#2C2C2E] text-primary font-title-md text-title-md py-4 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                20 SEC
+            </button>
+<button class="flex-1 bg-[#C6FF00] hover:bg-[#a6d700] text-[#0A0A0A] font-title-md text-title-md font-bold py-4 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2">
+                SKIP
+                <span class="material-symbols-outlined">skip_next</span>
+</button>
+</div>
+<!-- Small Non-Intrusive Banner Ad Placeholder -->
+<div class="w-full h-12 bg-surface-container-high/50 rounded-lg border border-outline-variant/30 flex items-center justify-center relative overflow-hidden mt-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant/50">Advertisement Space</span>
+<div class="absolute top-1 right-1 bg-surface-container-highest px-1 rounded-sm">
+<span class="font-label-caps text-[8px] leading-[10px] text-on-surface-variant">AD</span>
+</div>
+</div>
+</main>
+<!-- Suppressed TopAppBar and BottomNavBar as this is a focused, transactional timer screen -->
+<script>
+        // Simple script to animate the timer circle for demo purposes
+        document.addEventListener('DOMContentLoaded', () => {
+            const circle = document.querySelector('.timer-circle');
+            let offset = 879; // Total circumference
+            
+            // Simulate countdown visually
+            setInterval(() => {
+                offset -= 10;
+                if (offset < 0) offset = 879;
+                if(circle) {
+                     circle.style.strokeDashoffset = offset;
+                }
+            }, 500);
+        });
+    </script>
+</body></html>
