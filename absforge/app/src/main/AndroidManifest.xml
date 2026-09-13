@@ -21,10 +21,10 @@
         android:theme="@style/Theme.AbsForge"
         android:enableOnBackInvokedCallback="true">
 
-        <!-- Google Mobile Ads Application ID (Replace with ca-app-pub-7666445916638535~XXXXXXXXXX in Production) -->
+        <!-- Google Mobile Ads Application ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-1624772168623970~2559433854" />
 
         <activity
             android:name=".MainActivity"
