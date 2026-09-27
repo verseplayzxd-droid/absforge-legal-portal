@@ -34,6 +34,7 @@ class PreferencesManager(private val context: Context) {
         val USER_EMAIL = stringPreferencesKey("user_email")
         val USER_NAME = stringPreferencesKey("user_name")
         val AUTH_PROVIDER = stringPreferencesKey("auth_provider")
+        val FLEXIBLE_UPDATE_SNOOZE_TIMESTAMP = longPreferencesKey("flexible_update_snooze_timestamp")
     }
 
     val onboardingCompleted: Flow<Boolean> = dataStore.data.map { it[ONBOARDING_COMPLETED] ?: false }
@@ -109,5 +110,10 @@ class PreferencesManager(private val context: Context) {
     val strongReminderEnabled: Flow<Boolean> = dataStore.data.map { it[STRONG_REMINDER_ENABLED] ?: false }
     suspend fun setStrongReminderEnabled(enabled: Boolean) {
         dataStore.edit { it[STRONG_REMINDER_ENABLED] = enabled }
+    }
+
+    val flexibleUpdateSnoozeTimestamp: Flow<Long> = dataStore.data.map { it[FLEXIBLE_UPDATE_SNOOZE_TIMESTAMP] ?: 0L }
+    suspend fun setFlexibleUpdateSnoozed(timestamp: Long = System.currentTimeMillis()) {
+        dataStore.edit { it[FLEXIBLE_UPDATE_SNOOZE_TIMESTAMP] = timestamp }
     }
 }

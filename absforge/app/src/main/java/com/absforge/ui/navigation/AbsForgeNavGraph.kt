@@ -48,9 +48,25 @@ import com.absforge.ui.workout.ProgramScreen
 import com.absforge.ui.workout.WorkoutCompleteScreen
 import com.absforge.ui.workout.WorkoutOverviewScreen
 import com.absforge.ui.workout.player.WorkoutPlayerScreen
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import com.absforge.gatekeeper.GatekeeperDialog
+import com.absforge.gatekeeper.GatekeeperManager
 
 @Composable
 fun AbsForgeApp() {
+    val context = LocalContext.current
+    val app = context.applicationContext as AbsForgeApplication
+    val gatekeeperManager = remember {
+        GatekeeperManager.getInstance(context, app.preferencesManager)
+    }
+    val gatekeeperState by gatekeeperManager.gatekeeperState.collectAsState()
+    val gatekeeperConfig by gatekeeperManager.currentConfig.collectAsState()
+
+    LaunchedEffect(Unit) {
+        gatekeeperManager.checkRemoteConfig()
+    }
+
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
@@ -84,6 +100,20 @@ fun AbsForgeApp() {
             modifier = Modifier.padding(paddingValues)
         )
     }
+
+    GatekeeperDialog(
+        state = gatekeeperState,
+        config = gatekeeperConfig,
+        onUpdateClick = {
+            gatekeeperManager.openPlayStore(context, gatekeeperConfig?.playStoreUrl)
+        },
+        onDismissFlexible = {
+            gatekeeperManager.snoozeFlexibleUpdate()
+        },
+        onRetryMaintenance = {
+            gatekeeperManager.checkRemoteConfig()
+        }
+    )
 }
 
 @Composable
