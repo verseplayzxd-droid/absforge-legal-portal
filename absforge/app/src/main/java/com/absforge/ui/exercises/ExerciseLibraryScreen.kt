@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.absforge.ui.animation.ExerciseAnimationView
+import com.absforge.ui.animation.ExerciseThumbnail
 import com.absforge.ui.components.AbsForgeCard
 import com.absforge.ui.components.FilterChips
 import com.absforge.ui.components.SearchBar
@@ -105,17 +106,11 @@ fun ExerciseLibraryScreen(
                                 .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(64.dp)
-                                    .background(AbsForgeSurfaceElevated, AbsForgeShapes.smallShape)
-                            ) {
-                                ExerciseAnimationView(
-                                    animationId = exercise.animationId,
-                                    isPlaying = true,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
+                            ExerciseThumbnail(
+                                animationId = exercise.animationId,
+                                modifier = Modifier.size(64.dp),
+                                cornerRadius = 12
+                            )
 
                             Spacer(modifier = Modifier.width(12.dp))
 

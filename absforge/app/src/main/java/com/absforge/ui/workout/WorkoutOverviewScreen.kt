@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.absforge.ui.animation.ExerciseThumbnail
 import com.absforge.ui.components.AbsForgeButton
 import com.absforge.ui.theme.*
 
@@ -197,16 +198,12 @@ fun ExerciseCard(exercise: ExerciseDisplayItem, onInfoClick: () -> Unit) {
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Thumbnail placeholder
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(AbsForgeSurfaceElevated),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(Icons.Filled.Timer, contentDescription = null, tint = AbsForgePrimary)
-        }
+        // Exercise 3D Anatomical Image Thumbnail
+        ExerciseThumbnail(
+            animationId = exercise.animationId,
+            modifier = Modifier.size(64.dp),
+            cornerRadius = 12
+        )
         
         Spacer(modifier = Modifier.width(16.dp))
         
