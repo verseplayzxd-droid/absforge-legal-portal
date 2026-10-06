@@ -254,6 +254,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
             return
         }
         _state.update { it.copy(phase = WorkoutPhase.COUNTDOWN, countdownValue = 3) }
+        voiceCoachManager.announceGetReady()
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
             for (i in 3 downTo 1) {
@@ -292,7 +293,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
         }
 
         SoundManager.playExerciseStart()
-        voiceCoachManager.announceExerciseStart(currentEx.name)
+        voiceCoachManager.announceExerciseStart(currentEx.animationId, currentEx.name)
         startExerciseTimer()
     }
 
@@ -306,7 +307,12 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
 
                 if (newRemaining % 1000L == 0L) {
                     val secondsLeft = (newRemaining / 1000L).toInt()
-                    if (secondsLeft == 10) {
+                    val totalSec = (_state.value.exerciseTotalTimeMs / 1000L).toInt()
+                    val halfwaySec = totalSec / 2
+
+                    if (secondsLeft == halfwaySec && totalSec >= 20) {
+                        voiceCoachManager.announceHalfway()
+                    } else if (secondsLeft == 10) {
                         voiceCoachManager.announceTenSeconds()
                     } else if (secondsLeft in 1..3) {
                         SoundManager.playCountdownTick()
@@ -377,6 +383,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
 
     fun restartExercise() {
         timerJob?.cancel()
+        voiceCoachManager.stopCurrentAudio()
         val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex) ?: return
         val durationSec = currentEx.durationSeconds.takeIf { it > 0 } ?: 30
         val totalTimeMs = durationSec * 1000L
@@ -390,12 +397,13 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
             )
         }
         SoundManager.playExerciseStart()
-        voiceCoachManager.announceExerciseStart(currentEx.name)
+        voiceCoachManager.announceExerciseStart(currentEx.animationId, currentEx.name)
         startExerciseTimer()
     }
 
     fun skipExercise() {
         timerJob?.cancel()
+        voiceCoachManager.stopCurrentAudio()
         val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex) ?: return
         val updatedExercises = _state.value.exercises.toMutableList()
         updatedExercises[_state.value.currentExerciseIndex] = currentEx.copy(isSkipped = true)
@@ -427,7 +435,12 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
         }
         SoundManager.playRestStart()
         voiceCoachManager.announceRestStart()
-        voiceCoachManager.announceNextExercise(nextEx.name)
+        viewModelScope.launch {
+            delay(1200)
+            if (_state.value.phase == WorkoutPhase.REST && !_state.value.isPaused) {
+                voiceCoachManager.announceNextExercise(nextEx.animationId, nextEx.name)
+            }
+        }
         startRestTimer()
     }
 
@@ -466,6 +479,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
 
     fun skipRest() {
         timerJob?.cancel()
+        voiceCoachManager.stopCurrentAudio()
         SoundManager.playButtonClick()
         HapticManager.buttonPress(getApplication())
         _state.update { it.copy(currentExerciseIndex = it.currentExerciseIndex + 1) }
@@ -475,6 +489,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
     fun pause() {
         SoundManager.playPause()
         HapticManager.buttonPress(getApplication())
+        voiceCoachManager.pauseAudio()
         _state.update { it.copy(isPaused = true, phase = WorkoutPhase.PAUSED) }
         timerJob?.cancel()
     }
@@ -482,6 +497,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
     fun resume() {
         SoundManager.playResume()
         HapticManager.buttonPress(getApplication())
+        voiceCoachManager.resumeAudio()
         _state.update { it.copy(isPaused = false) }
         val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex)
         if (currentEx != null) {
@@ -504,6 +520,7 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
     fun endWorkout() {
         timerJob?.cancel()
         totalTimerJob?.cancel()
+        voiceCoachManager.stopCurrentAudio()
 
         SoundManager.playWorkoutComplete()
         HapticManager.workoutComplete(getApplication())
