@@ -19,6 +19,7 @@ val AbsForgeOnPrimary = Color(0xFFFFFFFF)
 val AbsForgeTextPrimary = Color(0xFFF7F7F7)
 val AbsForgeTextSecondary = Color(0xFFA1A1A1)
 val AbsForgeTextTertiary = Color(0xFF646464)
+val AbsForgeTextMuted = Color(0xFF7A7A7A)
 val AbsForgeDisabledText = Color(0xFF696969)
 val AbsForgeDisabledBackground = Color(0xFF292929)
 

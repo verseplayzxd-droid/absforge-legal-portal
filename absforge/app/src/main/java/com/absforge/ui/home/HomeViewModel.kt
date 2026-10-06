@@ -14,6 +14,30 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
 
+data class TodayExerciseItem(
+    val id: Int,
+    val name: String,
+    val animationId: String,
+    val targetMuscle: String,
+    val durationSeconds: Int,
+    val reps: Int? = null
+)
+
+data class DayProgressItem(
+    val dayNumber: Int,
+    val isCompleted: Boolean,
+    val isCurrent: Boolean
+)
+
+data class QuickWorkout(
+    val id: String,
+    val name: String,
+    val durationMinutes: Int,
+    val calories: Int,
+    val animationId: String,
+    val targetMuscle: String
+)
+
 data class HomeUiState(
     val userName: String = "Athlete",
     val greeting: String = "Good Morning",
@@ -33,14 +57,10 @@ data class HomeUiState(
     val totalCalories: Int = 0,
     val totalWorkouts: Int = 0,
     val motivationalQuote: String = "Day 1 crushed. Keep the momentum going.",
+    val todayExercises: List<TodayExerciseItem> = emptyList(),
+    val weeklyProgress: List<DayProgressItem> = emptyList(),
+    val featuredAnimationId: String = "crunch",
     val isLoading: Boolean = true
-)
-
-data class QuickWorkout(
-    val id: String,
-    val name: String,
-    val durationMinutes: Int,
-    val iconResName: String
 )
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -51,12 +71,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     val quickWorkouts = listOf(
-        QuickWorkout("qw1", "5 Min Abs", 5, "timer"),
-        QuickWorkout("qw2", "Lower Abs", 10, "fitness_center"),
-        QuickWorkout("qw3", "Core Burner", 15, "local_fire_department"),
-        QuickWorkout("qw4", "Plank Challenge", 8, "line_weight"),
-        QuickWorkout("qw5", "Oblique Blast", 12, "bolt"),
-        QuickWorkout("qw6", "Stretch & Recovery", 10, "self_improvement")
+        QuickWorkout("five_min_abs", "5 Min Abs", 5, 35, "crunch", "Upper & Mid Abs"),
+        QuickWorkout("lower_abs", "Lower Abs Focus", 8, 55, "leg_raise", "Lower Core & V-Line"),
+        QuickWorkout("core_burner", "Core Burner", 10, 80, "mountain_climbers", "Full Core & Stamina"),
+        QuickWorkout("plank_challenge", "Plank Challenge", 7, 50, "plank", "Isometric Endurance"),
+        QuickWorkout("oblique_blast", "Oblique Blast", 8, 60, "russian_twist", "Side Abs & Obliques"),
+        QuickWorkout("stretch_recovery", "Stretch & Recovery", 6, 25, "cobra_stretch", "Spine & Mobility")
     )
 
     init {
@@ -96,12 +116,34 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     var estMin = 0
                     var estCal = 0
                     val diff = pName.lowercase()
+                    val todayExerciseList = mutableListOf<TodayExerciseItem>()
+                    var featuredAnim = "crunch"
 
                     if (!restFlag && wDay != null) {
-                        val exercises = db.workoutDao().getExercisesForDaySync(wDay.id)
-                        exCount = exercises.size
+                        val dayExercises = db.workoutDao().getExercisesForDaySync(wDay.id)
+                        exCount = dayExercises.size
                         estMin = wDay.estimatedMinutes
                         estCal = wDay.estimatedCalories
+
+                        for (de in dayExercises) {
+                            val exEntity = db.exerciseDao().getById(de.exerciseId)
+                            if (exEntity != null) {
+                                todayExerciseList.add(
+                                    TodayExerciseItem(
+                                        id = exEntity.id,
+                                        name = exEntity.name,
+                                        animationId = exEntity.animationId,
+                                        targetMuscle = exEntity.targetMuscle,
+                                        durationSeconds = de.durationSeconds?.takeIf { it > 0 }
+                                            ?: exEntity.defaultDurationSeconds.takeIf { it > 0 } ?: 30,
+                                        reps = de.reps ?: exEntity.defaultReps.takeIf { it > 0 }
+                                    )
+                                )
+                            }
+                        }
+                        if (todayExerciseList.isNotEmpty()) {
+                            featuredAnim = todayExerciseList.first().animationId
+                        }
                     }
 
                     val qualifyingSessions = sessions.filter {
@@ -137,6 +179,17 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                         }
                     }
 
+                    // 7-Day Current Week Progress
+                    val weekStart = (((cDay - 1) / 7) * 7) + 1
+                    val weekEnd = (weekStart + 6).coerceAtMost(30)
+                    val weekDays = (weekStart..weekEnd).map { d ->
+                        DayProgressItem(
+                            dayNumber = d,
+                            isCompleted = qualifyingSessions.any { it.planId == pId && it.dayNumber == d },
+                            isCurrent = d == cDay
+                        )
+                    }
+
                     val quotes = listOf(
                         "Day $cDay crushed. Keep the momentum going!",
                         "One workout down. ${30 - cDay} days to go.",
@@ -164,6 +217,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                         totalCalories = totalC,
                         totalWorkouts = totalW,
                         motivationalQuote = quoteStr,
+                        todayExercises = todayExerciseList,
+                        weeklyProgress = weekDays,
+                        featuredAnimationId = featuredAnim,
                         isLoading = false
                     )
                 }
