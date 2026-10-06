@@ -401,10 +401,23 @@ fun AbsForgeAdBanner(
         return
     }
 
+    var adViewRef by remember { mutableStateOf<AdView?>(null) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            try {
+                adViewRef?.destroy()
+            } catch (e: Exception) {
+                Log.e("AdMobManager", "Error destroying banner AdView", e)
+            }
+        }
+    }
+
     AndroidView(
         modifier = modifier.fillMaxWidth(),
         factory = { ctx ->
             AdView(ctx).apply {
+                adViewRef = this
                 setAdSize(AdSize.BANNER)
                 adUnitId = AdMobConfig.bannerId
                 adListener = object : AdListener() {

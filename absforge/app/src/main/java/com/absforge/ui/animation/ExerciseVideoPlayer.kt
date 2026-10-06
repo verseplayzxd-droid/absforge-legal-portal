@@ -48,37 +48,75 @@ fun ExerciseVideoPlayer(
     }
 
     var isReady by remember { mutableStateOf(false) }
+    var hasError by remember { mutableStateOf(false) }
+
+    if (hasError) {
+        ExerciseThumbnail(
+            animationId = animationId,
+            modifier = modifier.fillMaxSize()
+        )
+        return
+    }
 
     val exoPlayer = remember(videoUriStr) {
-        ExoPlayer.Builder(context).build().apply {
-            repeatMode = Player.REPEAT_MODE_ALL
-            volume = 0f // Mute video audio so workout voice coach & sound effects are clear
-            val mediaItem = MediaItem.fromUri(Uri.parse(videoUriStr))
-            setMediaItem(mediaItem)
-            prepare()
-            playWhenReady = isPlaying
+        try {
+            ExoPlayer.Builder(context).build().apply {
+                repeatMode = Player.REPEAT_MODE_ALL
+                volume = 0f // Mute video audio so workout voice coach & sound effects are clear
+                val mediaItem = MediaItem.fromUri(Uri.parse(videoUriStr))
+                setMediaItem(mediaItem)
+                prepare()
+                playWhenReady = isPlaying
 
-            addListener(object : Player.Listener {
-                override fun onPlaybackStateChanged(playbackState: Int) {
-                    if (playbackState == Player.STATE_READY) {
-                        isReady = true
+                addListener(object : Player.Listener {
+                    override fun onPlaybackStateChanged(playbackState: Int) {
+                        if (playbackState == Player.STATE_READY) {
+                            isReady = true
+                        }
                     }
-                }
-            })
+
+                    override fun onPlayerError(error: androidx.media3.common.PlaybackException) {
+                        android.util.Log.e("ExerciseVideoPlayer", "ExoPlayer error: ${error.message}", error)
+                        hasError = true
+                    }
+                })
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("ExerciseVideoPlayer", "Failed to build ExoPlayer: ${e.message}", e)
+            hasError = true
+            null
         }
     }
 
-    LaunchedEffect(isPlaying) {
-        if (isPlaying) {
-            exoPlayer.play()
-        } else {
-            exoPlayer.pause()
+    if (exoPlayer == null) {
+        ExerciseThumbnail(
+            animationId = animationId,
+            modifier = modifier.fillMaxSize()
+        )
+        return
+    }
+
+    LaunchedEffect(isPlaying, exoPlayer) {
+        try {
+            if (isPlaying) {
+                exoPlayer.play()
+            } else {
+                exoPlayer.pause()
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("ExerciseVideoPlayer", "Error controlling playback", e)
         }
     }
 
     DisposableEffect(exoPlayer) {
         onDispose {
-            exoPlayer.release()
+            try {
+                exoPlayer.stop()
+                exoPlayer.clearMediaItems()
+                exoPlayer.release()
+            } catch (e: Exception) {
+                android.util.Log.e("ExerciseVideoPlayer", "Error releasing ExoPlayer", e)
+            }
         }
     }
 
@@ -89,21 +127,26 @@ fun ExerciseVideoPlayer(
             .background(Color(0xFF0A0B0E)),
         contentAlignment = Alignment.Center
     ) {
-        // Looping video view (Fitted perfectly with black background)
+        // Looping video view (Fitted perfectly with dark background)
         AndroidView(
             factory = { ctx ->
                 PlayerView(ctx).apply {
                     useController = false
                     resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-                    setBackgroundColor(android.graphics.Color.BLACK)
+                    setBackgroundColor(android.graphics.Color.TRANSPARENT)
                     this.player = exoPlayer
+                }
+            },
+            update = { playerView ->
+                if (playerView.player != exoPlayer) {
+                    playerView.player = exoPlayer
                 }
             },
             modifier = Modifier.fillMaxSize()
         )
 
         // Subtle loading indicator until first video frame is ready
-        if (!isReady) {
+        if (!isReady && !hasError) {
             CircularProgressIndicator(
                 color = AbsForgePrimary,
                 modifier = Modifier

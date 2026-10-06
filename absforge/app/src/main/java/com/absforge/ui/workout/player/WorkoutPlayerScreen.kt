@@ -57,17 +57,23 @@ fun WorkoutPlayerScreen(
                         onResume = viewModel::resume,
                         onComplete = viewModel::completeExercise,
                         onToggleSound = viewModel::toggleSound,
+                        onPrevious = viewModel::previousExercise,
+                        onSkip = viewModel::skipExercise,
                         onExit = onExit
                     )
                 }
 
                 if (state.phase == WorkoutPhase.EXERCISE_COMPLETE && exercise != null) {
-                    val repOrDurStr = exercise.reps?.let { "$it Reps" } ?: "${exercise.durationSeconds ?: 30} Seconds"
+                    val nextEx = state.exercises.getOrNull(state.currentExerciseIndex + 1)
                     ExerciseCompleteOverlay(
                         exerciseName = exercise.name,
-                        repsOrDuration = repOrDurStr,
-                        onContinue = viewModel::continueToRest,
-                        onRetry = viewModel::restartExercise
+                        targetMuscle = exercise.targetMuscle,
+                        initialReps = exercise.reps,
+                        durationSeconds = exercise.durationSeconds,
+                        nextExerciseName = nextEx?.name,
+                        onContinue = { customReps -> viewModel.continueToRest(customReps) },
+                        onRetry = viewModel::restartExercise,
+                        onAddExtraRest = { viewModel.addRestTime(20) }
                     )
                 }
 

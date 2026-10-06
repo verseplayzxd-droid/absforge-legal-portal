@@ -70,7 +70,7 @@ object SoundManager {
                     }
                     override fun onPeriodicNotification(track: AudioTrack?) {}
                 })
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 Log.e(TAG, "Error playing tone: ${e.message}")
             }
         }
