@@ -46,24 +46,25 @@ fun PreCountdownScreen(
     ) {
         Text(
             text = displayText,
-            color = Color(0xFFB7FF00),
-            fontSize = 120.sp,
-            fontWeight = FontWeight.Bold,
+            color = com.absforge.ui.theme.AbsForgePrimary,
+            fontSize = 110.sp,
+            fontWeight = FontWeight.Black,
             modifier = Modifier.scale(animatedScale)
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Text(
             text = "GET READY",
-            color = Color(0xFF9A9F9B),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium
+            color = com.absforge.ui.theme.AbsForgePrimary,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 2.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = exerciseName.uppercase(),
             color = Color.White,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Black
         )
     }
 }

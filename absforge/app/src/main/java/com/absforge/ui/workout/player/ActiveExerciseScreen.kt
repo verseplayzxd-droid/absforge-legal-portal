@@ -1,6 +1,7 @@
 package com.absforge.ui.workout.player
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -109,26 +111,26 @@ fun ActiveExerciseScreen(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Vector Animation View
+        // Video / Animation View
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(AbsForgeSurface, RoundedCornerShape(20.dp)),
+                .clip(RoundedCornerShape(20.dp))
+                .background(Color(0xFF0A0B0E))
+                .border(1.dp, AbsForgeGhostBorder, RoundedCornerShape(20.dp)),
             contentAlignment = Alignment.Center
         ) {
             ExerciseAnimationView(
                 animationId = exercise.animationId,
                 isPlaying = !state.isPaused,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(12.dp)
+                modifier = Modifier.fillMaxSize()
             )
         }
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Exercise Name & Rep Target / Muscle Info Chip (Left) + Large Real Countdown Timer (Right)
+        // Exercise Name & Rep Target / Muscle Info Chip (Left) + Countdown Timer (Right)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -174,12 +176,19 @@ fun ActiveExerciseScreen(
             }
 
             // Real 30-Second Countdown Timer (Counts DOWN 00:30 -> 00:00)
-            ProgressRing(progress = progress, modifier = Modifier.size(68.dp)) {
+            ProgressRing(
+                progress = progress,
+                size = 72.dp,
+                strokeWidth = 6.dp,
+                trackColor = Color(0xFF1E2024),
+                progressColor = AbsForgePrimary
+            ) {
                 Text(
                     text = String.format("%02d:%02d", remainingSeconds / 60, remainingSeconds % 60),
                     color = AbsForgePrimary,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Black,
+                    letterSpacing = 0.5.sp
                 )
             }
         }

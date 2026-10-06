@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -23,15 +25,15 @@ fun ProgressRing(
     modifier: Modifier = Modifier,
     size: Dp = 100.dp,
     strokeWidth: Dp = 8.dp,
-    trackColor: Color = Color(0xFF2C2C2E),
+    trackColor: Color = Color(0xFF222428),
     progressColor: Color = AbsForgePrimary,
     glowColor: Color = AbsForgePrimaryGlow,
     showGlow: Boolean = true,
     content: @Composable () -> Unit = {}
 ) {
     val animatedProgress by animateFloatAsState(
-        targetValue = progress,
-        animationSpec = tween(durationMillis = 500),
+        targetValue = progress.coerceIn(0f, 1f),
+        animationSpec = tween(durationMillis = 300),
         label = "progressAnimation"
     )
 
@@ -39,41 +41,58 @@ fun ProgressRing(
         contentAlignment = Alignment.Center,
         modifier = modifier.size(size)
     ) {
-        Canvas(modifier = Modifier.size(size)) {
+        Canvas(modifier = Modifier.matchParentSize()) {
             val strokeWidthPx = strokeWidth.toPx()
-            
-            // Draw track
+            val canvasDiameter = this.size.minDimension - strokeWidthPx
+            val topLeft = Offset(
+                (this.size.width - canvasDiameter) / 2f,
+                (this.size.height - canvasDiameter) / 2f
+            )
+            val arcSize = Size(canvasDiameter, canvasDiameter)
+
+            // Draw background track
             drawArc(
                 color = trackColor,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
+                topLeft = topLeft,
+                size = arcSize,
                 style = Stroke(width = strokeWidthPx)
             )
 
-            if (showGlow) {
-                // Draw glow
+            if (showGlow && animatedProgress > 0.01f) {
+                // Draw glow behind active arc
                 drawArc(
                     color = glowColor,
                     startAngle = -90f,
                     sweepAngle = animatedProgress * 360f,
                     useCenter = false,
-                    style = Stroke(width = strokeWidthPx * 2)
+                    topLeft = topLeft,
+                    size = arcSize,
+                    style = Stroke(width = strokeWidthPx * 1.8f, cap = StrokeCap.Round)
                 )
             }
 
-            // Draw progress
-            drawArc(
-                color = progressColor,
-                startAngle = -90f,
-                sweepAngle = animatedProgress * 360f,
-                useCenter = false,
-                style = Stroke(
-                    width = strokeWidthPx,
-                    cap = StrokeCap.Round
+            if (animatedProgress > 0.005f) {
+                // Draw active progress arc
+                drawArc(
+                    color = progressColor,
+                    startAngle = -90f,
+                    sweepAngle = animatedProgress * 360f,
+                    useCenter = false,
+                    topLeft = topLeft,
+                    size = arcSize,
+                    style = Stroke(
+                        width = strokeWidthPx,
+                        cap = StrokeCap.Round
+                    )
                 )
-            )
+            }
         }
-        content()
+
+        Box(contentAlignment = Alignment.Center) {
+            content()
+        }
     }
 }
