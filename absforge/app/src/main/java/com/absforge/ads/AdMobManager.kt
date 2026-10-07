@@ -381,7 +381,7 @@ object AdMobManager {
     }
 }
 
-// --- ADMOB AD BANNERS (ALWAYS VISIBLE WITH ZERO BLANK SPACES) ---
+// --- ADMOB AD BANNERS (Real Google AdMob Banner Only - No Mock Ads) ---
 @Composable
 fun AbsForgeAdBanner(
     modifier: Modifier = Modifier,
@@ -389,13 +389,19 @@ fun AbsForgeAdBanner(
 ) {
     if (AdMobManager.isPremium()) return
 
-    val isInPreview = LocalInspectionMode.current
-    if (isInPreview) {
-        HouseAdBanner(modifier = modifier, tag = tag)
+    var isFailed by remember { mutableStateOf(false) }
+
+    if (isFailed) {
+        Box(modifier = modifier.height(0.dp))
         return
     }
 
-    var isAdLoaded by remember { mutableStateOf(false) }
+    val isInPreview = LocalInspectionMode.current
+    if (isInPreview) {
+        Box(modifier = modifier.height(0.dp))
+        return
+    }
+
     var adViewRef by remember { mutableStateOf<AdView?>(null) }
 
     DisposableEffect(Unit) {
@@ -408,113 +414,27 @@ fun AbsForgeAdBanner(
         }
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        // 1. Google AdMob Banner
-        AndroidView(
-            modifier = Modifier.fillMaxSize(),
-            factory = { ctx ->
-                AdView(ctx).apply {
-                    adViewRef = this
-                    setAdSize(AdSize.BANNER)
-                    adUnitId = AdMobConfig.bannerId
-                    adListener = object : AdListener() {
-                        override fun onAdLoaded() {
-                            Log.d("AdMobManager", "ADMOB BANNER LOADED tag=$tag")
-                            isAdLoaded = true
-                        }
-
-                        override fun onAdFailedToLoad(error: LoadAdError) {
-                            Log.d("AdMobManager", "ADMOB BANNER FAILED tag=$tag error=${error.message}")
-                            isAdLoaded = false
-                        }
+    AndroidView(
+        modifier = modifier.fillMaxWidth(),
+        factory = { ctx ->
+            AdView(ctx).apply {
+                adViewRef = this
+                setAdSize(AdSize.BANNER)
+                adUnitId = AdMobConfig.bannerId
+                adListener = object : AdListener() {
+                    override fun onAdLoaded() {
+                        Log.d("AdMobManager", "ADMOB BANNER LOADED tag=$tag")
                     }
-                    loadAd(AdRequest.Builder().build())
-                }
-            }
-        )
 
-        // 2. If AdMob returns No Fill or is loading, show House Promo Ad so banner is ALWAYS 100% visible!
-        if (!isAdLoaded) {
-            HouseAdBanner(
-                modifier = Modifier.fillMaxSize(),
-                tag = tag
-            )
-        }
-    }
-}
-
-@Composable
-fun HouseAdBanner(
-    modifier: Modifier = Modifier,
-    tag: String = "house_ad"
-) {
-    Surface(
-        color = Color(0xFF111319),
-        shape = RoundedCornerShape(10.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, AbsForgeGhostBorder),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1f)
-            ) {
-                Surface(
-                    color = AbsForgePrimary.copy(alpha = 0.2f),
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    Text(
-                        text = "AD",
-                        color = AbsForgePrimary,
-                        fontSize = 9.sp,
-                        fontWeight = FontWeight.Black,
-                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
-                    )
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        Log.d("AdMobManager", "ADMOB BANNER FAILED tag=$tag error=${error.message}")
+                        isFailed = true
+                    }
                 }
-                Spacer(modifier = Modifier.width(8.dp))
-                Column {
-                    Text(
-                        text = "ABSFORGE PRO • 30-DAY CORE",
-                        color = Color.White,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Black,
-                        maxLines = 1
-                    )
-                    Text(
-                        text = "Unlock all 33 3D HD exercise animations",
-                        color = AbsForgeTextSecondary,
-                        fontSize = 9.sp,
-                        maxLines = 1
-                    )
-                }
-            }
-            Surface(
-                color = AbsForgePrimary,
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = "GET PRO",
-                    color = Color.White,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Black,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                )
+                loadAd(AdRequest.Builder().build())
             }
         }
-    }
+    )
 }
 
 // --- ADMOB NATIVE ADVANCED CARD ---

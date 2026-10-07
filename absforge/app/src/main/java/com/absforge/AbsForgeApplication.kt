@@ -36,6 +36,11 @@ class AbsForgeApplication : Application() {
 
         NotificationHelper.createNotificationChannel(this)
         com.absforge.ads.AdMobManager.init(this)
+        applicationScope.launch {
+            preferencesManager.isPremium.collect { isPrem ->
+                com.absforge.ads.AdMobManager.setPremiumUser(isPrem)
+            }
+        }
         seedDatabaseIfNeeded()
     }
 

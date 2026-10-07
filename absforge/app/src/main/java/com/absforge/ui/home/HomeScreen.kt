@@ -35,6 +35,7 @@ fun HomeScreen(
     onStartWorkout: (planId: Int, dayNumber: Int) -> Unit,
     onQuickWorkoutSelected: (workoutId: String) -> Unit,
     onNavigateToProgram: () -> Unit,
+    onNavigateToPremium: () -> Unit = {},
     viewModel: HomeViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -88,28 +89,53 @@ fun HomeScreen(
                             )
                         }
 
-                        // Streak badge
                         Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(14.dp))
-                                .background(Color(0x28FFA500))
-                                .border(1.dp, Color(0x66FFA500), RoundedCornerShape(14.dp))
-                                .padding(horizontal = 12.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Icon(
-                                Icons.Filled.LocalFireDepartment,
-                                contentDescription = null,
-                                tint = Color(0xFFFFA500),
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = "${uiState.currentStreak} DAY STREAK",
-                                color = Color(0xFFFFA500),
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Black
-                            )
+                            // Streak badge
+                            Row(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .background(Color(0x28FFA500))
+                                    .border(1.dp, Color(0x66FFA500), RoundedCornerShape(14.dp))
+                                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    Icons.Filled.LocalFireDepartment,
+                                    contentDescription = null,
+                                    tint = Color(0xFFFFA500),
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Text(
+                                    text = "${uiState.currentStreak}D",
+                                    color = Color(0xFFFFA500),
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Black
+                                )
+                            }
+
+                            // Remove Ads / Pro pill
+                            Row(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .background(Color(0x33FFD700))
+                                    .border(1.dp, Color(0xFFFFD700), RoundedCornerShape(14.dp))
+                                    .clickable { onNavigateToPremium() }
+                                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(text = "👑", fontSize = 12.sp)
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    text = "NO ADS",
+                                    color = Color(0xFFFFD700),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Black
+                                )
+                            }
                         }
                     }
 

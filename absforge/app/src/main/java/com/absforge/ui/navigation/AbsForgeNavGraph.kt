@@ -208,6 +208,9 @@ fun AbsForgeNavHost(
                 },
                 onNavigateToProgram = {
                     navController.navigate(Screen.Workouts.route)
+                },
+                onNavigateToPremium = {
+                    navController.navigate(Screen.Premium.route)
                 }
             )
         }

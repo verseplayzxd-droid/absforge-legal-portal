@@ -100,7 +100,55 @@ fun ProfileScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Pro / Remove Ads Upgrade Card
+            Card(
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1B231D)),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFB7FF00)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onNavigateToPremium() }
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(androidx.compose.foundation.shape.CircleShape)
+                            .background(Color(0x33B7FF00)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "👑", fontSize = 20.sp)
+                    }
+                    Spacer(modifier = Modifier.width(14.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "REMOVE ALL ADS",
+                            color = Color(0xFFB7FF00),
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                        Text(
+                            text = "From $7 • Instant In-App Cashfree Activation",
+                            color = Color(0xFF9AA8A0),
+                            fontSize = 12.sp
+                        )
+                    }
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowRight,
+                        contentDescription = null,
+                        tint = Color(0xFFB7FF00)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
 
         item {
