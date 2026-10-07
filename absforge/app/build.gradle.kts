@@ -5,6 +5,17 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+import java.util.Properties
+
+val localProps = Properties()
+val localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) {
+    localProps.load(localPropsFile.inputStream())
+}
+
+val cfAppId = localProps.getProperty("cashfree.app.id") ?: ""
+val cfSecretKey = localProps.getProperty("cashfree.secret.key") ?: ""
+
 android {
     namespace = "com.absforge"
     compileSdk = 36
@@ -16,6 +27,9 @@ android {
         versionCode = 4
         versionName = "1.0.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CASHFREE_APP_ID", "\"$cfAppId\"")
+        buildConfigField("String", "CASHFREE_SECRET_KEY", "\"$cfSecretKey\"")
 
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")

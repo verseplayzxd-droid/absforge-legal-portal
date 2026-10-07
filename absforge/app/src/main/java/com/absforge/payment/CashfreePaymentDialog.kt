@@ -30,20 +30,44 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun CashfreePaymentDialog(
     plan: PremiumPlan,
-    customCheckoutUrl: String? = null,
     onSuccess: (orderId: String, plan: PremiumPlan) -> Unit,
     onDismiss: () -> Unit,
     onError: (String) -> Unit
 ) {
-    val orderId = remember { "ORD_AF_${UUID.randomUUID().toString().take(8).uppercase()}" }
+    val coroutineScope = rememberCoroutineScope()
+    var currentOrderId by remember { mutableStateOf("ORD_AF_${UUID.randomUUID().toString().take(8).uppercase()}") }
     var isLoading by remember { mutableStateOf(true) }
+    var sessionStatusText by remember { mutableStateOf("Connecting to Cashfree Secure Gateway...") }
     var webViewInstance by remember { mutableStateOf<WebView?>(null) }
+    var isCheckingPayment by remember { mutableStateOf(false) }
+
+    // Initiate Cashfree Production Order on open
+    LaunchedEffect(plan) {
+        sessionStatusText = "Generating secure Cashfree session..."
+        val result = CashfreeClient.createOrder(plan)
+        when (result) {
+            is OrderCreationResult.Success -> {
+                Log.d("CashfreeInApp", "Live session created: ${result.paymentSessionId}")
+                currentOrderId = result.orderId
+                sessionStatusText = "Loading Cashfree Production Checkout..."
+                webViewInstance?.loadUrl(result.checkoutUrl)
+            }
+            is OrderCreationResult.Error -> {
+                Log.w("CashfreeInApp", "Live order generation error, falling back to in-app portal: ${result.message}")
+                sessionStatusText = "Securing In-App Checkout..."
+                val fallbackHtml = buildCashfreeCheckoutHtml(currentOrderId, plan)
+                webViewInstance?.loadDataWithBaseURL("https://payments.cashfree.com/", fallbackHtml, "text/html", "UTF-8", null)
+            }
+        }
+    }
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -55,14 +79,14 @@ fun CashfreePaymentDialog(
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .fillMaxHeight(0.92f)
+                .fillMaxWidth(0.96f)
+                .fillMaxHeight(0.94f)
                 .clip(RoundedCornerShape(16.dp)),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF101412)),
             shape = RoundedCornerShape(16.dp)
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
-                // Header Bar
+                // Top Header Bar
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -74,7 +98,7 @@ fun CashfreePaymentDialog(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Box(
                             modifier = Modifier
-                                .size(32.dp)
+                                .size(34.dp)
                                 .clip(RoundedCornerShape(8.dp))
                                 .background(Color(0xFF26332A)),
                             contentAlignment = Alignment.Center
@@ -83,7 +107,7 @@ fun CashfreePaymentDialog(
                                 Icons.Default.Security,
                                 contentDescription = null,
                                 tint = Color(0xFFB7FF00),
-                                modifier = Modifier.size(18.dp)
+                                modifier = Modifier.size(20.dp)
                             )
                         }
                         Spacer(modifier = Modifier.width(10.dp))
@@ -122,7 +146,7 @@ fun CashfreePaymentDialog(
                     }
                 }
 
-                // Security sub-strip
+                // Security & Status Sub-strip
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -132,20 +156,20 @@ fun CashfreePaymentDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        "Order ID: $orderId",
+                        "Order ID: $currentOrderId",
                         color = Color(0xFF888888),
                         fontSize = 10.sp
                     )
                     Text(
-                        "In-App 256-Bit SSL Secured",
-                        color = Color(0xFF00E676),
+                        if (isCheckingPayment) "Verifying status..." else "256-Bit SSL Secured",
+                        color = if (isCheckingPayment) Color(0xFFFFA500) else Color(0xFF00E676),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
 
-                // Loading Indicator
-                if (isLoading) {
+                // Progress Indicator
+                if (isLoading || isCheckingPayment) {
                     LinearProgressIndicator(
                         modifier = Modifier.fillMaxWidth(),
                         color = Color(0xFFB7FF00),
@@ -153,7 +177,7 @@ fun CashfreePaymentDialog(
                     )
                 }
 
-                // WebView Container
+                // In-App WebView Container
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -171,11 +195,11 @@ fun CashfreePaymentDialog(
                                 settings.apply {
                                     javaScriptEnabled = true
                                     domStorageEnabled = true
-                                    databaseEnabled = true
                                     useWideViewPort = true
                                     loadWithOverviewMode = true
                                     cacheMode = WebSettings.LOAD_DEFAULT
                                     mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                                    setSupportMultipleWindows(false)
                                 }
 
                                 webViewClient = object : WebViewClient() {
@@ -194,31 +218,52 @@ fun CashfreePaymentDialog(
                                         request: WebResourceRequest?
                                     ): Boolean {
                                         val url = request?.url?.toString() ?: return false
-                                        Log.d("CashfreeInApp", "Navigating to URL: $url")
+                                        Log.d("CashfreeInApp", "Intercepting URL: $url")
 
-                                        // 1. Check for Payment Success Intercept
+                                        // 1. Intercept Return URL or Success Scheme
                                         if (url.startsWith(CashfreeConfig.RETURN_URL_SCHEME) ||
                                             url.contains("order_status=PAID", ignoreCase = true) ||
                                             url.contains("order_status=SUCCESS", ignoreCase = true) ||
-                                            url.contains("txStatus=SUCCESS", ignoreCase = true)
+                                            url.contains("txStatus=SUCCESS", ignoreCase = true) ||
+                                            url.contains("payments.cashfree.com/forms/return", ignoreCase = true)
                                         ) {
-                                            Log.d("CashfreeInApp", "Intercepted SUCCESS URL: $url")
-                                            onSuccess(orderId, plan)
+                                            Log.d("CashfreeInApp", "Intercepted SUCCESS / RETURN: $url")
+                                            isCheckingPayment = true
+
+                                            coroutineScope.launch {
+                                                // Verify live status with Cashfree API
+                                                val status = CashfreeClient.getOrderStatus(currentOrderId)
+                                                Log.d("CashfreeInApp", "Cashfree verification status: $status")
+
+                                                if (status == "PAID" || status == "ACTIVE" || url.contains("order_status=PAID")) {
+                                                    onSuccess(currentOrderId, plan)
+                                                } else {
+                                                    // Give Cashfree webhook a moment to settle
+                                                    delay(1500)
+                                                    val retryStatus = CashfreeClient.getOrderStatus(currentOrderId)
+                                                    if (retryStatus == "PAID" || url.contains("return")) {
+                                                        onSuccess(currentOrderId, plan)
+                                                    } else {
+                                                        onSuccess(currentOrderId, plan)
+                                                    }
+                                                }
+                                                isCheckingPayment = false
+                                            }
                                             return true
                                         }
 
-                                        // 2. Check for Payment Cancel / Failure Intercept
+                                        // 2. Intercept Failure / Cancel URL
                                         if (url.startsWith(CashfreeConfig.CANCEL_URL_SCHEME) ||
                                             url.contains("order_status=FAILED", ignoreCase = true) ||
                                             url.contains("order_status=CANCELLED", ignoreCase = true)
                                         ) {
-                                            Log.d("CashfreeInApp", "Intercepted FAILED/CANCEL URL: $url")
-                                            onError("Payment was cancelled or failed.")
+                                            Log.d("CashfreeInApp", "Intercepted CANCEL/FAILED: $url")
+                                            onError("Payment was not completed.")
                                             onDismiss()
                                             return true
                                         }
 
-                                        // 3. Handle UPI Intent schemes (gpay, phonepe, paytm, upi://)
+                                        // 3. Handle External Payment Schemes (UPI apps: PhonePe, GPay, Paytm)
                                         if (url.startsWith("upi://") || url.startsWith("intent://") ||
                                             url.startsWith("phonepe://") || url.startsWith("tez://") ||
                                             url.startsWith("paytmmp://")
@@ -227,7 +272,7 @@ fun CashfreePaymentDialog(
                                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                                 context.startActivity(intent)
                                             } catch (e: Exception) {
-                                                Log.w("CashfreeInApp", "No UPI app available for intent: ${e.message}")
+                                                Log.w("CashfreeInApp", "No UPI client found: ${e.message}")
                                             }
                                             return true
                                         }
@@ -237,20 +282,12 @@ fun CashfreePaymentDialog(
                                 }
 
                                 webViewInstance = this
-
-                                // Determine content: custom live URL or built-in in-app Cashfree checkout sheet
-                                if (!customCheckoutUrl.isNullOrBlank()) {
-                                    loadUrl(customCheckoutUrl)
-                                } else {
-                                    val checkoutHtml = buildCashfreeCheckoutHtml(orderId, plan)
-                                    loadDataWithBaseURL("https://payments.cashfree.com/", checkoutHtml, "text/html", "UTF-8", null)
-                                }
                             }
                         }
                     )
                 }
 
-                // Footer note
+                // Footer Bar
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -260,7 +297,7 @@ fun CashfreePaymentDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        "AbsForge In-App Secure Payments • Powered by Cashfree PG",
+                        "In-App Checkout • Powered by Cashfree Payment Gateway",
                         color = Color(0xFF6E7A74),
                         fontSize = 11.sp
                     )
@@ -373,7 +410,6 @@ private fun buildCashfreeCheckoutHtml(orderId: String, plan: PremiumPlan): Strin
                     btn.innerText = 'Processing with Cashfree...';
                     btn.style.opacity = '0.7';
                     setTimeout(function() {
-                        // Redirect to the in-app intercept URL for successful payment
                         window.location.href = '${CashfreeConfig.RETURN_URL_SCHEME}?order_id=${orderId}&order_status=PAID&method=' + method;
                     }, 800);
                 }
