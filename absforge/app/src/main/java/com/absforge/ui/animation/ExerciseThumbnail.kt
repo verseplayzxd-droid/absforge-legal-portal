@@ -34,7 +34,8 @@ fun ExerciseThumbnail(
     animationId: String,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    cornerRadius: Int = 12
+    cornerRadius: Int = 12,
+    contentScale: ContentScale = ContentScale.Fit
 ) {
     val context = LocalContext.current
     val assetPath = remember(animationId) { ExerciseMediaRegistry.getImageAssetPath(animationId) }
@@ -70,7 +71,7 @@ fun ExerciseThumbnail(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(cornerRadius.dp))
-            .background(Color(0xFF141615)),
+            .background(Color(0xFF0A0B0E)),
         contentAlignment = Alignment.Center
     ) {
         val bitmap = imageBitmapState.value
@@ -79,7 +80,7 @@ fun ExerciseThumbnail(
                 bitmap = bitmap,
                 contentDescription = contentDescription,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = contentScale
             )
         } else {
             Icon(

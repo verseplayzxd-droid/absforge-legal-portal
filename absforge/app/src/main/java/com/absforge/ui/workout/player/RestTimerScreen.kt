@@ -156,20 +156,23 @@ fun RestTimerScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Exercise Preview Animation Box
+                    // Exercise Preview Animation Box (Proportional 200dp display)
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(130.dp)
-                            .clip(RoundedCornerShape(14.dp))
+                            .height(200.dp)
+                            .clip(RoundedCornerShape(16.dp))
                             .background(Color(0xFF0A0B0E))
-                            .border(1.dp, AbsForgeGhostBorder, RoundedCornerShape(14.dp)),
+                            .border(1.dp, AbsForgeGhostBorder, RoundedCornerShape(16.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         ExerciseThumbnail(
                             animationId = nextAnimId,
-                            modifier = Modifier.fillMaxSize(),
-                            cornerRadius = 14
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(4.dp),
+                            cornerRadius = 14,
+                            contentScale = androidx.compose.ui.layout.ContentScale.Fit
                         )
                     }
 
