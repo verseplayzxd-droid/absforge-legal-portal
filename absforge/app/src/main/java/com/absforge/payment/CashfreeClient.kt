@@ -12,7 +12,7 @@ import java.net.URL
 import java.util.UUID
 
 sealed class OrderCreationResult {
-    data class Success(val orderId: String, val paymentSessionId: String, val checkoutUrl: String) : OrderCreationResult()
+    data class Success(val orderId: String, val paymentSessionId: String) : OrderCreationResult()
     data class Error(val message: String) : OrderCreationResult()
 }
 
@@ -75,8 +75,7 @@ object CashfreeClient {
                 val json = JSONObject(responseText)
                 val paymentSessionId = json.optString("payment_session_id")
                 if (paymentSessionId.isNotBlank()) {
-                    val checkoutUrl = "https://payments.cashfree.com/forms/$paymentSessionId"
-                    OrderCreationResult.Success(orderId, paymentSessionId, checkoutUrl)
+                    OrderCreationResult.Success(orderId, paymentSessionId)
                 } else {
                     OrderCreationResult.Error("No payment session id returned: $responseText")
                 }

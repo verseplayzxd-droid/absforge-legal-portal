@@ -69,7 +69,7 @@ object CashfreeConfig {
     val baseUrl: String
         get() = if (isProduction) "https://api.cashfree.com/pg" else "https://sandbox.cashfree.com/pg"
 
-    val returnUrl: String = "https://payments.cashfree.com/forms/return?order_id={order_id}"
+    val returnUrl: String = "https://absforge.app/payment/return?order_id={order_id}"
     const val RETURN_URL_SCHEME = "absforge://payment_success"
     const val CANCEL_URL_SCHEME = "absforge://payment_failed"
 }
