@@ -145,26 +145,6 @@ fun CashfreePaymentDialog(
                     }
                 }
 
-                // Emulator / Fast Test Bar
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0xFF1D2621))
-                        .clickable {
-                            onSuccess(currentOrderId, plan)
-                        }
-                        .padding(horizontal = 16.dp, vertical = 7.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        "⚡ Quick Test: Tap to instantly activate without card",
-                        color = Color(0xFFB7FF00),
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
                 // Security & Status Sub-strip
                 Row(
                     modifier = Modifier

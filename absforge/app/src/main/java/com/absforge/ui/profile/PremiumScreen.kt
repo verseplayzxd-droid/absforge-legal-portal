@@ -124,20 +124,6 @@ fun PremiumScreen(onBack: () -> Unit) {
                             fontSize = 13.sp,
                             textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        OutlinedButton(
-                            onClick = {
-                                scope.launch {
-                                    preferencesManager.setIsPremium(false)
-                                    AdMobManager.setPremiumUser(false)
-                                    Toast.makeText(context, "Test: Ads Re-Enabled", Toast.LENGTH_SHORT).show()
-                                }
-                            },
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFFFA500)),
-                            shape = RoundedCornerShape(8.dp)
-                        ) {
-                            Text("Turn Ads Back On (Testing Mode)", fontSize = 12.sp)
-                        }
                     }
                 }
             }
@@ -277,33 +263,7 @@ fun PremiumScreen(onBack: () -> Unit) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Fast Test Button
-            OutlinedButton(
-                onClick = {
-                    scope.launch {
-                        preferencesManager.setIsPremium(true)
-                        AdMobManager.setPremiumUser(true)
-                        lastPurchasedPlan = currentPlan
-                        showSuccessDialog = true
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF888888)),
-                shape = RoundedCornerShape(10.dp),
-                border = ButtonDefaults.outlinedButtonBorder.copy(
-                    brush = androidx.compose.ui.graphics.SolidColor(Color(0xFF2B332F))
-                )
-            ) {
-                Text(
-                    "⚡ Instant Test Activation (Simulate Cashfree Success)",
-                    fontSize = 12.sp,
-                    color = Color(0xFF9AA8A0)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(28.dp))
         }
     }
 
