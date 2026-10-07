@@ -138,7 +138,14 @@ fun ProfileScreen(
             )
             ProfileMenuItem("Privacy & Data", Icons.Default.Lock, onClick = onNavigateToPrivacy)
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            com.absforge.ads.AbsForgeAdBanner(
+                modifier = Modifier.fillMaxWidth(),
+                tag = "profile_bottom_banner"
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

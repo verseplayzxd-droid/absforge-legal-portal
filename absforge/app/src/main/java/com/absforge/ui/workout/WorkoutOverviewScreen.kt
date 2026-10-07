@@ -66,15 +66,20 @@ fun WorkoutOverviewScreen(
             )
         },
         bottomBar = {
-            Box(
+            Column(
                 modifier = Modifier
                     .background(AbsForgeBackground)
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
                 AbsForgeButton(
                     text = "START WORKOUT",
                     onClick = onStartWorkout,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().height(50.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                com.absforge.ads.AbsForgeAdBanner(
+                    modifier = Modifier.fillMaxWidth(),
+                    tag = "overview_bottom_banner"
                 )
             }
         },

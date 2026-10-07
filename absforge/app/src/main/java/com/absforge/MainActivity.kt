@@ -30,4 +30,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        com.absforge.ads.AdMobManager.showAppOpenAdIfAvailable(this)
+    }
 }

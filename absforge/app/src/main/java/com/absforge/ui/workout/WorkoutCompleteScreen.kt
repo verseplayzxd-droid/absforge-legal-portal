@@ -276,7 +276,14 @@ fun WorkoutCompleteScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(14.dp))
+
+            com.absforge.ads.AbsForgeAdBanner(
+                modifier = Modifier.fillMaxWidth(),
+                tag = "workout_complete_banner"
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

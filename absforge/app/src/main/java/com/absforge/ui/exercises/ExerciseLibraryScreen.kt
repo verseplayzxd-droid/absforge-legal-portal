@@ -158,5 +158,11 @@ fun ExerciseLibraryScreen(
             }
         }
 
+        Spacer(modifier = Modifier.height(6.dp))
+
+        com.absforge.ads.AbsForgeAdBanner(
+            modifier = Modifier.fillMaxWidth(),
+            tag = "library_bottom_banner"
+        )
     }
 }
