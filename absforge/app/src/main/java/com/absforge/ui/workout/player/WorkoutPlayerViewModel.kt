@@ -272,7 +272,11 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun startExercise() {
-        val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex) ?: return
+        val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex)
+        if (currentEx == null) {
+            endWorkout()
+            return
+        }
 
         // Preload next interstitial ad around Exercise 2 or 3
         if (_state.value.currentExerciseIndex == 1 || _state.value.currentExerciseIndex == 2) {
@@ -432,7 +436,11 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
 
     private fun startRest() {
         val currentEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex) ?: return
-        val nextEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex + 1) ?: return
+        val nextEx = _state.value.exercises.getOrNull(_state.value.currentExerciseIndex + 1)
+        if (nextEx == null) {
+            endWorkout()
+            return
+        }
 
         val restSec = if (currentEx.restAfterSeconds > 0) currentEx.restAfterSeconds else _state.value.defaultRestSeconds
         val restTimeMs = restSec * 1000L
@@ -475,8 +483,13 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
             }
             if (_state.value.restTimeRemainingMs <= 0 && !_state.value.isPaused) {
                 SoundManager.playRestEnd()
-                _state.update { it.copy(currentExerciseIndex = it.currentExerciseIndex + 1) }
-                startExercise()
+                val nextIndex = _state.value.currentExerciseIndex + 1
+                if (nextIndex >= _state.value.totalExercises) {
+                    endWorkout()
+                } else {
+                    _state.update { it.copy(currentExerciseIndex = nextIndex) }
+                    startExercise()
+                }
             }
         }
     }
@@ -495,8 +508,13 @@ class WorkoutPlayerViewModel(application: Application) : AndroidViewModel(applic
         voiceCoachManager.stopCurrentAudio()
         SoundManager.playButtonClick()
         HapticManager.buttonPress(getApplication())
-        _state.update { it.copy(currentExerciseIndex = it.currentExerciseIndex + 1) }
-        startExercise()
+        val nextIndex = _state.value.currentExerciseIndex + 1
+        if (nextIndex >= _state.value.totalExercises) {
+            endWorkout()
+        } else {
+            _state.update { it.copy(currentExerciseIndex = nextIndex) }
+            startExercise()
+        }
     }
 
     fun pause() {

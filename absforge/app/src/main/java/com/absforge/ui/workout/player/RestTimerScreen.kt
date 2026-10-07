@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.absforge.ads.AbsForgeAdBanner
-import com.absforge.ui.animation.ExerciseAnimationView
+import com.absforge.ui.animation.ExerciseThumbnail
 import com.absforge.ui.components.AbsForgeButton
 import com.absforge.ui.components.ProgressRing
 import com.absforge.ui.theme.*
@@ -166,10 +166,10 @@ fun RestTimerScreen(
                             .border(1.dp, AbsForgeGhostBorder, RoundedCornerShape(14.dp)),
                         contentAlignment = Alignment.Center
                     ) {
-                        ExerciseAnimationView(
+                        ExerciseThumbnail(
                             animationId = nextAnimId,
-                            isPlaying = true,
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.fillMaxSize(),
+                            cornerRadius = 14
                         )
                     }
 

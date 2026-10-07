@@ -108,9 +108,12 @@ fun ExerciseVideoPlayer(
         }
     }
 
+    var playerViewRef by remember { mutableStateOf<PlayerView?>(null) }
+
     DisposableEffect(exoPlayer) {
         onDispose {
             try {
+                playerViewRef?.player = null
                 exoPlayer.stop()
                 exoPlayer.clearMediaItems()
                 exoPlayer.release()
@@ -134,12 +137,21 @@ fun ExerciseVideoPlayer(
                     useController = false
                     resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                     setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                    playerViewRef = this
                     this.player = exoPlayer
                 }
             },
             update = { playerView ->
+                playerViewRef = playerView
                 if (playerView.player != exoPlayer) {
                     playerView.player = exoPlayer
+                }
+            },
+            onRelease = { playerView ->
+                try {
+                    playerView.player = null
+                } catch (e: Exception) {
+                    // Ignore release errors
                 }
             },
             modifier = Modifier.fillMaxSize()

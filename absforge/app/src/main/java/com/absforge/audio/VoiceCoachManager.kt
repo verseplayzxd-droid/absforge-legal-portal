@@ -52,14 +52,13 @@ class VoiceCoachManager(private val context: Context) : TextToSpeech.OnInitListe
         try {
             stopCurrentAudio()
 
-            val mp = MediaPlayer.create(appContext, resId)
+            val audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .build()
+
+            val mp = MediaPlayer.create(appContext, resId, audioAttributes, 0)
             if (mp != null) {
-                mp.setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                        .build()
-                )
                 mp.setOnCompletionListener { player ->
                     try {
                         player.release()
@@ -100,17 +99,15 @@ class VoiceCoachManager(private val context: Context) : TextToSpeech.OnInitListe
 
     @Synchronized
     fun stopCurrentAudio() {
-        try {
-            mediaPlayer?.let { mp ->
-                if (mp.isPlaying) {
-                    mp.stop()
-                }
+        val mp = mediaPlayer
+        mediaPlayer = null
+        if (mp != null) {
+            try {
+                mp.reset()
                 mp.release()
+            } catch (e: Exception) {
+                Log.e(TAG, "Error stopping MediaPlayer: ${e.message}")
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error stopping MediaPlayer: ${e.message}")
-        } finally {
-            mediaPlayer = null
         }
         try {
             tts?.stop()
