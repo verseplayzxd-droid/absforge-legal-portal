@@ -72,6 +72,10 @@ class GatekeeperManager private constructor(
                 val currentVersionCode = BuildConfig.VERSION_CODE
                 Log.d(TAG, "Current Version: $currentVersionCode, Remote Min: ${config.minVersionCode}, Latest: ${config.latestVersionCode}")
 
+                val isBelowMin = config.minVersionCode > 0 && currentVersionCode < config.minVersionCode
+                val isBelowLatest = config.latestVersionCode > 0 && currentVersionCode < config.latestVersionCode
+                val isOutdated = isBelowMin || isBelowLatest
+
                 when {
                     // 1. Maintenance Mode has absolute priority
                     config.isMaintenance -> {
@@ -79,14 +83,14 @@ class GatekeeperManager private constructor(
                         _gatekeeperState.value = GatekeeperState.MAINTENANCE
                     }
 
-                    // 2. Force Update required if explicitly flagged or current version is below minimum allowed
-                    config.forceUpdate || (config.minVersionCode > 0 && currentVersionCode < config.minVersionCode) -> {
-                        Log.w(TAG, "Force update required: current $currentVersionCode < min ${config.minVersionCode}")
+                    // 2. Force Update required ONLY if user is outdated AND (explicitly flagged or below minimum allowed)
+                    isOutdated && (config.forceUpdate || isBelowMin) -> {
+                        Log.w(TAG, "Force update required: current $currentVersionCode < min ${config.minVersionCode} or latest ${config.latestVersionCode}")
                         _gatekeeperState.value = GatekeeperState.FORCE_UPDATE
                     }
 
-                    // 3. Flexible Update (Optional) if flagged or below latest version code
-                    config.flexibleUpdate || (config.latestVersionCode > 0 && currentVersionCode < config.latestVersionCode) -> {
+                    // 3. Flexible Update (Optional) if user is outdated AND (flagged or below latest version code)
+                    isOutdated && (config.flexibleUpdate || isBelowLatest) -> {
                         val lastSnoozed = preferencesManager.flexibleUpdateSnoozeTimestamp.first()
                         val now = System.currentTimeMillis()
                         val isSnoozed = (now - lastSnoozed) < SNOOZE_DURATION_MS

@@ -60,6 +60,15 @@ fun GatekeeperDialog(
         return
     }
 
+    // Safety guard: if user already has the latest version or is above minimum, NEVER show update dialog!
+    val currentCode = BuildConfig.VERSION_CODE
+    if ((state == GatekeeperState.FORCE_UPDATE || state == GatekeeperState.FLEXIBLE_UPDATE) &&
+        config.minVersionCode > 0 && currentCode >= config.minVersionCode &&
+        (config.latestVersionCode <= 0 || currentCode >= config.latestVersionCode)
+    ) {
+        return
+    }
+
     val isStrict = state == GatekeeperState.FORCE_UPDATE || state == GatekeeperState.MAINTENANCE
 
     // Trap Android system and gesture back navigation completely when in strict mode
